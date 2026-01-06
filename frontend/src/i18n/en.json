@@ -1,0 +1,206 @@
+{
+  "app": {
+    "title": "StageEvery",
+    "tagline": "Website platform for artists"
+  },
+  "common": {
+    "toggleTheme": "Toggle theme",
+    "language": "Language"
+  },
+  "homepage": {
+    "seo": {
+      "title": "StageEvery – Official Artist Website & EPK Platform",
+      "description": "StageEvery helps artists create a professional website and EPK to present music, visuals, and booking info in one official link."
+    },
+    "hero": {
+      "headline": "Not just a link.\nThis is your official space.",
+      "subheadline": "Your music, visuals, and story —\npresented with intention, clarity, and identity.",
+      "ctaPrimary": "Create your artist page",
+      "ctaSecondary": "View a sample page"
+    },
+
+    "artistTruth": {
+      "text": [
+        "You’ve sent:",
+        "a Facebook link",
+        "a Spotify playlist",
+        "a Drive folder",
+        "a YouTube video",
+        "And hoped someone would piece together who you are as an artist.",
+        "But art deserves more than scattered links."
+      ]
+    },
+
+    "solution": {
+      "intro": "We built a place where:",
+      "points": [
+        "Music is heard in the right context",
+        "Visuals are seen with intention",
+        "Stories are told as a whole"
+      ],
+      "closing": [
+        "One artist website.",
+        "One clear identity.",
+        "One link to share."
+      ]
+    },
+
+    "showcase": {
+      "headline": "Every artist has a world of their own.",
+      "description": [
+        "Your website should reflect that.",
+        "Not a generic template.",
+        "Not a social profile.",
+        "But your own space."
+      ]
+    },
+
+    "epk": {
+      "headline": "Everything is ready when they open your link",
+      "description": [
+        "When a booking agent or brand visits your page,",
+        "they don’t need to ask for more."
+      ],
+      "items": [
+        "Music",
+        "Visuals",
+        "Contact information"
+      ]
+    },
+
+    "bilingual": {
+      "headline": "Artists have no borders",
+      "description": [
+        "Your website shouldn’t either.",
+        "Seamlessly switch between Vietnamese and English —",
+        "for audiences, partners, and global stages."
+      ]
+    },
+
+    "whoFor": {
+      "headline": "Built for",
+      "items": [
+        "Independent artists building a long-term identity",
+        "Bands, DJs, and producers ready for booking",
+        "Anyone serious about their artistic journey"
+      ]
+    },
+
+    "finalCta": {
+      "headline": [
+        "No noise.",
+        "Just the right place."
+      ],
+      "cta": "Start with your artist name"
+    }
+  },
+  "artist": {
+    "page": {
+      "title": "{{name}} | Official Artist Page on StageEvery",
+      "descriptionFallback": "Official artist page of {{name}} on StageEvery."
+    },
+    "sections": {
+      "about": "About",
+      "music": "Music",
+      "contact": "Contact"
+    },
+    "actions": {
+        "listen": "Listen"
+    },
+    "states": {
+      "loading": "Loading artist...",
+      "notFound": "Artist not found"
+    }
+  },
+  "dashboard": {
+    "layout": {
+      "title": "Dashboard",
+      "profile": "Profile",
+      "appearance": "Appearance",
+      "contact": "Contact",
+      "music": "Music",
+      "preview": "Preview"
+    },
+    "profile": {
+      "loading": "Loading...",
+      "contentLanguage": "Content language",
+      "bilingual": "Bilingual",
+      "onlyVi": "Vietnamese only",
+      "onlyEn": "English only",
+
+      "title": "Artist Profile",
+      "basicInfo": "Basic information",
+      "name": "Artist name",
+      "tagline": "Tagline",
+      "taglineHint": "A short sentence describing your style or musical identity",
+      "nameHint": "Official display name of the artist",
+      "taglineLimitHint": "A short tagline shown at the top of your artist page",
+      "bioShort": "Short bio",
+      "bioShortVi": "Short bio (Vietnamese)",
+      "bioShortEn": "Short bio (English)",
+      "bioShortHint": "A short description used for SEO and artist page header",
+      "genres": "Genres",
+      "genresHint": "Up to 5 genres (press Enter to add)",
+      "location": "Location",
+      "locationHint": "City, country (e.g. Berlin, Germany)",
+
+      "bioFull": "Extended bio",
+      "bioFullHint": "This section is hidden by default and only appears when visitors click “Read more” on your artist page.",
+      "bioFullRecommended": "Recommended length: around 500 - 800 characters",
+
+      
+      "save": "Save",
+      "saving": "Saving...",
+      "saved": "Saved",
+      "reset": "Reset"
+    },
+    "contact": {
+      "title": "Contact",
+      "section": "Contact information",
+      "email": "Email",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "spotify": "Spotify",
+      "soundcloud": "SoundCloud",
+      "youtube": "YouTube",
+      "save": "Save",
+      "saving": "Saving",
+      "saved": "Saved",
+      "reset": "Restore original content",
+      "loading": "Loading...",
+
+      "emailHint": "Official contact email for booking, press, or collaborations"
+
+    },
+    "appearance": {
+      "dashboardTheme": "Text colors",
+      "artistTheme": "Artist page theme",
+      "title": "Appearance",
+      "themeColors": "Theme colors",
+      "images": "Images",
+
+      "bg": "Background",
+      "bgSoft": "Soft background",
+
+      "text": "Text",
+      "textSoft": "Sub text",
+      "textMuted": "Muted text",
+
+      "primary": "Primary color",
+
+      "avatar": "Avatar",
+      "cover": "Cover",
+
+      "preview": {
+        "artistName": "Artist Name",
+        "tagline": "Artist tagline goes here",
+        "meta": "Genre • Location",
+        "body": "This is sample content text for preview."
+      }
+    },
+    "preview": {
+      "openPublic": "Open public page",
+      "note": "Preview – this is how your public page looks to others"
+    }
+  }
+}

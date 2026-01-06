@@ -1,0 +1,54 @@
+/* ===== INFO ICON + TOOLTIP ===== */
+.info-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.info-icon {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  flex-shrink: 0;
+  margin-left: 6px;
+//   transform: translateY(3px);
+  transform: scale(0.7);
+}
+
+.info-icon:hover {
+  opacity: 1;
+}
+
+.info-tooltip {
+  position: absolute;
+  top: 24px;
+  left: 0;
+
+  min-width: 220px;
+  max-width: 280px;
+
+  padding: 8px 10px;
+  border-radius: 8px;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 50;
+}
+
+.info-wrapper:hover .info-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}

@@ -1,0 +1,137 @@
+.appearance-section {
+  max-width: 1200px;
+  color: var(--text);
+
+  h2 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    color: var(--text);
+  }
+}
+
+/* ================= GRID (TOP) ================= */
+
+.appearance-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* ================= LEFT ================= */
+
+.appearance-controls--colors {
+  max-width: 320px;
+}
+
+/* ================= BLOCK ================= */
+
+.appearance-block {
+  margin-bottom: 24px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+
+  h3 {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: var(--text);
+  }
+}
+
+/* ================= FORM ================= */
+
+.color-row,
+.file-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+
+  label {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.2;
+  }
+}
+
+input[type='color'] {
+  width: 56px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* ================= PREVIEW ================= */
+
+.appearance-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* DEVICE TOGGLE */
+
+.preview-device-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  button {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.85rem;
+
+    &.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+}
+
+
+/* ================= PREVIEW FRAME ================= */
+
+.appearance-preview-frame {
+  position: relative;
+  height: 640px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: #111;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= IMAGES (BOTTOM) ================= */
+
+.appearance-images {
+  margin-top: 32px;
+  max-width: 480px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+  .appearance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .appearance-controls--colors {
+    max-width: none;
+  }
+
+  .appearance-preview-frame {
+    height: 520px;
+  }
+}

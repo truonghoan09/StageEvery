@@ -1,0 +1,99 @@
+.who-for {
+  padding: 120px 24px;
+  background: var(--bg);
+}
+
+.who-for__container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ===== HEADLINE ===== */
+
+.who-for__headline {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 48px;
+  color: var(--text);
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* ===== LIST ===== */
+
+.who-for__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.who-for__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.who-for__item:last-child {
+  margin-bottom: 0;
+}
+
+/* Marker */
+.who-for__marker {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--text-muted);
+  transform: translateY(2px);
+}
+
+/* Text */
+.who-for__text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ===== ANIMATION IN ===== */
+
+.who-for.is-visible .who-for__headline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.who-for.is-visible .who-for__item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger */
+.who-for.is-visible .who-for__item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.who-for.is-visible .who-for__item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.who-for.is-visible .who-for__item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.who-for.is-visible .who-for__item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .who-for {
+    padding: 96px 16px;
+  }
+
+  .who-for__headline {
+    font-size: 1.9rem;
+    margin-bottom: 36px;
+  }
+}

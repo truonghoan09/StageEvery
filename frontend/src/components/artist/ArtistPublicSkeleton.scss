@@ -1,0 +1,102 @@
+.artist-public-skeleton {
+  padding: 40px 24px;
+}
+
+/* =========================
+   Base skeleton effect
+========================= */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+
+  background-color: rgba(220, 220, 220, 0.163);
+  border-radius: 10px;
+}
+
+/* Shimmer layer – diagonal */
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: -40%; /* mở rộng để lướt xéo không bị hụt */
+
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+
+  transform: translate(-100%, -100%);
+  animation: skeleton-shimmer-diagonal 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer-diagonal {
+  100% {
+    transform: translate(100%, 100%);
+  }
+}
+
+
+/* =========================
+   Skeleton sizes
+========================= */
+
+.skeleton-title {
+  height: 42px;
+  width: 320px;
+  margin-bottom: 20px;
+}
+
+.skeleton-line {
+  height: 20px;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.skeleton-line.short {
+  width: 70%;
+}
+
+.skeleton-track {
+  height: 72px;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 14px;
+}
+
+/* =========================
+   Section spacing
+========================= */
+
+.artist-bio,
+.artist-music {
+  margin-top: 48px;
+}
+
+/* =========================
+   Hero specific
+========================= */
+
+.artist-hero__banner.skeleton {
+  height: 320px;
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 40px;
+}
+
+.artist-hero__content {
+  display: flex;
+  align-items: center;
+}
+
+.artist-hero__avatar-wrap.skeleton {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin-right: 32px;
+}
+
+.artist-hero__info {
+  flex: 1;
+}

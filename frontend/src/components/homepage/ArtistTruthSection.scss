@@ -1,0 +1,50 @@
+.artist-truth {
+  padding: 7rem 2rem; // ↓ giảm nhịp, nối mượt với hero
+  background: var(--background);
+}
+
+.artist-truth__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr; // text > image
+  gap: 4rem;
+  align-items: center;
+}
+
+.artist-truth__text {
+  p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.6rem;
+    color: var(--text-primary);
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 2.2rem;
+  }
+
+  em {
+    font-style: italic;
+    opacity: 0.85;
+  }
+}
+
+.artist-truth__visual {
+  width: 100%;
+  aspect-ratio: 2 / 3; // cao – thanh
+  background-image: url("/assets/images/home/artist-truth-stage.jpg");
+  background-size: cover; // ⚠️ quan trọng
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.7;
+  filter: grayscale(100%) contrast(1.05);
+  border-radius: 12px;
+
+  // tạo cảm giác "lệch – ý niệm"
+  transform: translateY(1.5rem);
+}

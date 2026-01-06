@@ -1,0 +1,90 @@
+.solution {
+  padding: 7rem 2rem 7.5rem; // ↓ giảm nhịp, nối mượt với section trước
+  background: var(--background);
+
+  opacity: 0;
+  transform: translateY(50px); // ↓ nhẹ hơn cho tinh tế
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.solution__inner {
+  max-width: 1000px; // ↓ thu lại để ảnh không bị "origin"
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr; // 👈 text chiếm vai chính
+  gap: 4.5rem; // ↓ bớt trống
+  align-items: center;
+}
+
+.solution__text {
+  h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+  }
+
+  .solution__intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2.2rem; // ↓ bớt khoảng cách
+    opacity: 0.85;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 1.2rem; // ↓ gọn hơn
+    line-height: 1.6;
+
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+
+    &::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      opacity: 0.45;
+    }
+  }
+
+  .solution.is-visible & li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.solution__visual {
+  width: 100%;
+  aspect-ratio: 4 / 5; // 👈 BỚT CAO → đỡ "banner"
+  max-height: 360px;   // 👈 KHÓA SIZE CÓ Ý ĐỒ
+
+  background-image: url("/assets/images/home/solution-stage-lighting.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.7; // giữ đúng cái bạn thấy đẹp
+  filter: grayscale(100%) brightness(0.9) contrast(1.05);
+
+  border-radius: 14px; // ↑ sang hơn
+
+  will-change: transform;
+  transition: transform 0.2s linear;
+}

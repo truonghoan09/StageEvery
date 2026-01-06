@@ -1,0 +1,66 @@
+.home-hero {
+  position: relative;
+  padding: 10rem 2rem 8rem;
+  color: white;
+  overflow: hidden;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.35) 35%,
+      rgba(0, 0, 0, 0.15) 65%,
+      rgba(0, 0, 0, 0.05) 100%
+    ),
+    url("/assets/images/home/hero-stage-spotlight.jpg");
+
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
+.home-hero__inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.home-hero__headline {
+  font-size: clamp(3rem, 6vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  max-width: 720px;
+}
+
+.home-hero__subheadline {
+  margin-top: 2rem;
+  max-width: 640px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.home-hero__actions {
+  margin-top: 4rem;
+  display: flex;
+  gap: 1.5rem;
+
+  button {
+    padding: 0.9rem 1.8rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  button:first-child {
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+  }
+}

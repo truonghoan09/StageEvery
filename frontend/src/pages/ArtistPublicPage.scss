@@ -1,0 +1,39 @@
+/* frontend/src/pages/ArtistPublicPage.scss */
+
+.artist-public-page {
+  display: flex;
+  flex-direction: column;
+
+  /* ===== THEME (ARTIST OVERRIDE) ===== */
+  background: var(--artist-bg, var(--bg));
+  color: var(--artist-text, var(--text));
+
+  /* Desktop spacing */
+  gap: 56px;
+  padding-bottom: 80px;
+}
+
+/* ===== Tablet & Mobile ===== */
+@media (max-width: 768px) {
+  .artist-public-page {
+    gap: 32px;         
+    padding-bottom: 56px;
+  }
+
+  /* Hero luôn nên sát section kế tiếp hơn */
+  .artist-public-page > :first-child {
+    margin-bottom: -8px; 
+  }
+}
+
+/* ===== Small Mobile ===== */
+@media (max-width: 420px) {
+  .artist-public-page {
+    gap: 24px;          
+    padding-bottom: 48px;
+  }
+
+  .artist-public-page > :first-child {
+    margin-bottom: -12px;
+  }
+}

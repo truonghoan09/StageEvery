@@ -1,0 +1,79 @@
+.bilingual-wave {
+  position: relative;
+  padding: 240px 24px 160px;
+  background: var(--bg);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* ===== COMPACT VARIANT (for short sections) ===== */
+
+.bilingual-wave--compact {
+  padding: 160px 24px 110px;
+}
+
+@media (max-width: 768px) {
+  .bilingual-wave--compact {
+    padding: 120px 16px 90px;
+  }
+}
+
+/* ===== SVG BACKGROUND ===== */
+
+.bilingual-wave__svg {
+  position: absolute;
+  top: 28%;
+  left: -12%;
+  width: 124%;
+  height: 55%;
+  pointer-events: none;
+}
+
+/* Border line */
+.map-line {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 10;
+  stroke-dashoffset: 1400;
+  transition: stroke-dashoffset 2.2s ease;
+}
+
+.bilingual-wave.is-visible .map-line {
+  stroke-dashoffset: 0;
+}
+
+/* ===== CONTENT ===== */
+
+.bilingual-wave__content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.bilingual-wave__content h2 {
+  font-size: 2.6rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.bilingual-wave__content p {
+  font-size: 1rem;
+  color: var(--text-muted);
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s;
+}
+
+.bilingual-wave.is-visible h2,
+.bilingual-wave.is-visible p {
+  opacity: 1;
+  transform: translateY(0);
+}

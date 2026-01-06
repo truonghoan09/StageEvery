@@ -1,0 +1,33 @@
+/* ================= FRAME ================= */
+/* Khung hiển thị scaled */
+
+.appearance-preview-frame::before {
+  content: none !important;
+  display: none !important;
+}
+
+.appearance-preview-frame {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #111;
+}
+
+
+/* ================= VIEWPORT THẬT ================= */
+
+.appearance-preview-viewport {
+  background: var(--artist-bg, #fff);
+}
+
+/* ================= SCROLL (GIỐNG BROWSER) ================= */
+
+.appearance-preview-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* QUAN TRỌNG: scrollbar nằm TRONG viewport */
+  scrollbar-gutter: stable;
+}

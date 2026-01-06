@@ -1,0 +1,207 @@
+{
+  "app": {
+    "title": "StageEvery",
+    "tagline": "Nền tảng website cho nghệ sĩ"
+  },
+  "common": {
+    "toggleTheme": "Đổi giao diện",
+    "language": "Ngôn ngữ"
+  },
+  "homepage": {
+    "seo": {
+      "title": "StageEvery – Website & EPK chính thức cho nghệ sĩ",
+      "description": "StageEvery giúp nghệ sĩ tạo website và EPK chuyên nghiệp để giới thiệu âm nhạc, hình ảnh và thông tin booking trong một link duy nhất."
+    },
+    "hero": {
+      "headline": "Không chỉ là link.\nĐây là không gian chính thức của bạn.",
+      "subheadline": "Âm nhạc, hình ảnh và câu chuyện của bạn —\nđược đặt đúng chỗ, đúng ngữ cảnh, đúng giá trị.",
+      "ctaPrimary": "Tạo trang nghệ sĩ",
+      "ctaSecondary": "Xem một trang mẫu"
+    },
+
+    "artistTruth": {
+      "text": [
+        "Bạn từng gửi:",
+        "một link Facebook",
+        "một playlist Spotify",
+        "một folder Drive",
+        "một video YouTube",
+        "Và hy vọng người xem tự ghép lại con người nghệ sĩ của bạn.",
+        "Nhưng nghệ thuật không nên được trình bày như một danh sách link."
+      ]
+    },
+
+    "solution": {
+      "intro": "Chúng tôi tạo ra một nơi để:",
+      "points": [
+        "Âm nhạc được nghe trong không gian phù hợp",
+        "Hình ảnh được nhìn với cảm xúc",
+        "Câu chuyện được kể trọn vẹn"
+      ],
+      "closing": [
+        "Một website nghệ sĩ.",
+        "Một bản sắc rõ ràng.",
+        "Một link duy nhất để chia sẻ."
+      ]
+    },
+
+    "showcase": {
+      "headline": "Mỗi nghệ sĩ có một thế giới riêng.",
+      "description": [
+        "Website của bạn cũng vậy.",
+        "Không phải template chung.",
+        "Không phải hồ sơ mạng xã hội.",
+        "Mà là không gian của bạn."
+      ]
+    },
+
+    "epk": {
+      "headline": "Mọi thứ đã sẵn sàng khi họ mở link của bạn",
+      "description": [
+        "Khi booking agent hoặc brand xem trang của bạn,",
+        "họ không cần tìm thêm gì nữa."
+      ],
+      "items": [
+        "Âm nhạc",
+        "Hình ảnh",
+        "Thông tin liên hệ"
+      ]
+    },
+
+    "bilingual": {
+      "headline": "Nghệ sĩ không có biên giới",
+      "description": [
+        "Website của bạn cũng không nên có.",
+        "Chuyển đổi dễ dàng giữa tiếng Việt và tiếng Anh —",
+        "cho khán giả, đối tác và sân khấu quốc tế."
+      ]
+    },
+
+    "whoFor": {
+      "headline": "Dành cho",
+      "items": [
+        "Nghệ sĩ độc lập đang xây dựng hình ảnh dài hạn",
+        "Band, DJ, Producer cần hồ sơ booking rõ ràng",
+        "Những ai nghiêm túc với con đường nghệ thuật của mình"
+      ]
+    },
+
+    "finalCta": {
+      "headline": [
+        "Không cần ồn ào.",
+        "Chỉ cần đúng chỗ."
+      ],
+      "cta": "Bắt đầu với tên nghệ sĩ của bạn"
+    }
+  },
+  "artist": {
+    "page": {
+      "title": "{{name}} | Trang nghệ sĩ chính thức trên StageEvery",
+      "descriptionFallback": "Trang nghệ sĩ chính thức của {{name}} trên StageEvery."
+    },
+    "sections": {
+      "about": "Giới thiệu",
+      "music": "Âm nhạc",
+      "contact": "Liên hệ"
+    },
+    "actions": {
+        "listen": "Nghe nhạc"
+    },
+    "states": {
+      "loading": "Đang tải nghệ sĩ...",
+      "notFound": "Không tìm thấy nghệ sĩ"
+    }
+  },
+  "dashboard": {
+    "layout": {
+      "title": "Bảng điều khiển",
+      "profile": "Hồ sơ",
+      "appearance": "Giao diện",
+      "contact": "Liên hệ",
+
+      "music": "Âm nhạc",
+      "preview": "Xem trước"
+    },
+    "profile": {
+      "loading": "Đang tải...",
+      "contentLanguage": "Ngôn ngữ nội dung",
+      "bilingual": "Song ngữ",
+      "onlyVi": "Chỉ tiếng Việt",
+      "onlyEn": "Chỉ Tiếng Anh",
+      "title": "Hồ sơ nghệ sĩ",
+      "basicInfo": "Thông tin cơ bản",
+      "name": "Tên nghệ sĩ",
+      "tagline": "Tagline",
+      "taglineHint": "Một câu ngắn mô tả phong cách hoặc tinh thần âm nhạc của bạn",
+      "nameHint": "Tên hiển thị chính thức của nghệ sĩ",
+      "taglineLimitHint": "Tagline ngắn gọn, hiển thị ở đầu trang nghệ sĩ",
+      "bioShort": "Giới thiệu ngắn",
+      "bioShortVi": "Giới thiệu ngắn (Tiếng Việt)",
+      "bioShortEn": "Giới thiệu ngắn (English)",
+      "bioShortHint": "Đoạn giới thiệu ngắn dùng cho SEO và phần đầu trang nghệ sĩ",
+      "genres": "Thể loại",
+      "genresHint": "Tối đa 5 thể loại (nhấn Enter để thêm)",
+      "location": "Địa điểm",
+      "locationHint": "Thành phố, quốc gia (ví dụ: Hà Nội, Việt Nam)",
+
+      "bioFull": "Giới thiệu chi tiết",
+      "bioFullHint": "Phần này sẽ bị ẩn ban đầu và chỉ hiển thị khi người xem bấm “Xem thêm” trên trang nghệ sĩ.",
+
+      "bioFullRecommended": "Độ dài khuyến nghị: khoảng 500 - 800 ký tự",
+      
+    
+      "save": "Lưu",
+      "saving": "Đang lưu...",
+      "saved": "Đã lưu",
+      "reset": "Khôi phục nội dung gốc"
+    },
+    "appearance": {
+      "dashboardTheme": "Màu chữ",
+      "artistTheme": "Giao diện trang nghệ sĩ",
+      "title": "Giao diện",
+      "themeColors": "Màu sắc",
+      "images": "Hình ảnh",
+
+      "bg": "Màu nền",
+      "bgSoft": "Nền phụ",
+
+      "text": "Màu chữ chính",
+      "textSoft": "Màu chữ phụ",
+      "textMuted": "Màu chữ mờ",
+
+      "primary": "Màu nhấn",
+
+      "avatar": "Ảnh đại diện",
+      "cover": "Ảnh bìa",
+
+      "preview": {
+        "artistName": "Tên nghệ sĩ",
+        "tagline": "Mô tả ngắn của nghệ sĩ",
+        "meta": "Thể loại • Khu vực",
+        "body": "Đây là nội dung mẫu để xem trước giao diện."
+      }
+    },
+    "contact": {
+        "title": "Liên hệ",
+        "section": "Thông tin liên hệ",
+        "email": "Email",
+        "facebook": "Facebook/Fanpage",
+        "instagram": "Instagram",
+        "spotify": "Spotify",
+        "soundcloud": "SoundCloud",
+        "youtube": "YouTube",
+        "save": "Lưu",
+        "saving": "Đang lưu",
+        "saved": "Đã lưu",
+        "reset": "Khôi phục nội dung gốc",
+        "loading": "Đang tải...",
+
+        "emailHint": "Email liên hệ chính thức cho booking, press hoặc hợp tác"
+
+      },
+      "preview": {
+        "openPublic": "Mở trang public",
+        "note": "Bản xem trước – đây là cách trang của bạn hiển thị với công chúng"
+      }
+  }
+}

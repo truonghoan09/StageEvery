@@ -1,0 +1,72 @@
+/* frontend/src/components/artist/ArtistMusic.scss */
+
+.artist-music {
+  max-width: 720px;
+  margin: 0 auto; // 👈 CHỈ THAY DÒNG NÀY
+
+  h2 {
+    margin-bottom: 20px;
+  }
+}
+
+.track-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+
+  &.playing {
+    .track-title {
+      color: var(--primary);
+      font-weight: 600;
+    }
+  }
+}
+
+.play-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+
+  &:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    background: var(--border);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.track-title {
+  font-size: 0.95rem;
+}
+
+.music-external {
+  margin-top: 20px;
+
+  a {
+    font-size: 0.9rem;
+    color: var(--primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

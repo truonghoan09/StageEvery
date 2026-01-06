@@ -1,0 +1,54 @@
+.dashboard-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header / note phía trên */
+.preview-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 13px;
+  color: var(--text-soft);
+
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+
+/* Khung bao preview – KHÔNG can thiệp layout bên trong */
+.preview-frame {
+  position: relative;
+
+  /* chỉ để nhìn “được đặt trong dashboard” */
+  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  /* shadow rất nhẹ, không phá hero */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.preview-open-btn {
+  font-size: 13px;
+  font-weight: 500;
+
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--border);
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.preview-open-btn:hover {
+  background: rgba(99, 102, 241, 0.08);
+}
+
