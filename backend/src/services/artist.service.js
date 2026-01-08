@@ -5,12 +5,18 @@ const getArtistBySlug = async (slug) => {
     .collection('artists')
     .where('slug', '==', slug)
     .limit(1)
-    .get()
+    .get();
 
-  if (snapshot.empty) return null
+  if (snapshot.empty) return null;
 
-  return snapshot.docs[0].data()
-}
+  const doc = snapshot.docs[0];
+
+  return {
+    id: doc.id,
+    ...doc.data(),
+  };
+};
+
 
 module.exports = {
   getArtistBySlug,

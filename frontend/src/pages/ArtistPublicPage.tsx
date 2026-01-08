@@ -1,4 +1,5 @@
 import './ArtistPublicPage.scss';
+import { getPaletteTokens } from '../config/getPaletteTokens';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -174,9 +175,10 @@ export default function ArtistPublicPage({ previewSlug }: ArtistPublicPageProps)
     artist.avatarUrl;
 
 
-  const themeTokens = isPreview
-  ? previewTheme ?? artist.theme?.tokens
-  : artist.theme?.tokens
+  const paletteTokens = isPreview
+  ? previewTheme
+  : getPaletteTokens(artist.theme?.paletteId);
+
 
 
   return (
@@ -208,14 +210,14 @@ export default function ArtistPublicPage({ previewSlug }: ArtistPublicPageProps)
       <main
         className={`artist-public-page ${isPreview ? 'is-preview' : ''}`}
         style={
-          themeTokens
+          paletteTokens
             ? ({
-                '--artist-bg': themeTokens.bg,
-                '--artist-bg-soft': themeTokens.bgSoft,
-                '--artist-text': themeTokens.text,
-                '--artist-text-soft': themeTokens.textSoft,
-                '--artist-text-muted': themeTokens.textMuted,
-                '--artist-primary': themeTokens.primary,
+                '--artist-bg': paletteTokens.bg,
+                '--artist-bg-soft': paletteTokens.bgSoft,
+                '--artist-text': paletteTokens.text,
+                '--artist-text-soft': paletteTokens.textSoft,
+                '--artist-text-muted': paletteTokens.textMuted,
+                '--artist-primary': paletteTokens.primary,
               } as React.CSSProperties)
             : undefined
         }

@@ -70,15 +70,8 @@ export interface Artist {
   // Optional future
   gallery?: string[];
   theme?: {
-    tokens?: {
-      bg: string,
-      bgSoft: string,
-      text: string,
-      textSoft: string,
-      textMuted: string,
-      primary: string
-    }
-  }; 
+    paletteId: string;
+  };
 }
 
 export interface ArtistTrack {
