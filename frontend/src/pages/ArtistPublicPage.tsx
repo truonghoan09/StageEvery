@@ -38,6 +38,71 @@ export default function ArtistPublicPage({ previewSlug }: ArtistPublicPageProps)
     return () => window.removeEventListener('message', onMessage)
   }, [isPreview])
 
+  useEffect(() => {
+    if (!isPreview) return
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+
+      // Chặn link
+      if (target.closest('a')) {
+        e.preventDefault()
+        e.stopPropagation()
+        return
+      }
+
+      // Chặn button
+      if (target.closest('button')) {
+        e.preventDefault()
+        e.stopPropagation()
+        return
+      }
+    }
+
+    document.addEventListener('click', handleClick, true)
+
+    return () => {
+      document.removeEventListener('click', handleClick, true)
+    }
+  }, [isPreview])
+
+
+  useEffect(() => {
+    if (!isPreview) return
+
+    const handleMediaPlay = (e: Event) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      const media = e.target as HTMLMediaElement
+      media.pause()
+    }
+
+    document.addEventListener('play', handleMediaPlay, true)
+
+    return () => {
+      document.removeEventListener('play', handleMediaPlay, true)
+    }
+  }, [isPreview])
+
+  useEffect(() => {
+    if (!isPreview) return
+
+    const handleFocus = (e: FocusEvent) => {
+      const target = e.target as HTMLElement
+      if (target.matches('input, textarea, select')) {
+        target.blur()
+      }
+    }
+
+    document.addEventListener('focusin', handleFocus)
+
+    return () => {
+      document.removeEventListener('focusin', handleFocus)
+    }
+  }, [isPreview])
+
+
   if (!slug) return null;
 
 
@@ -141,7 +206,7 @@ export default function ArtistPublicPage({ previewSlug }: ArtistPublicPageProps)
       </Helmet>
 
       <main
-        className="artist-public-page"
+        className={`artist-public-page ${isPreview ? 'is-preview' : ''}`}
         style={
           themeTokens
             ? ({

@@ -13,6 +13,13 @@
   padding-bottom: 80px;
 }
 
+.artist-public-page.is-preview {
+  a,
+  button {
+    cursor: default;
+  }
+}
+
 /* ===== Tablet & Mobile ===== */
 @media (max-width: 768px) {
   .artist-public-page {

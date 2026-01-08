@@ -1,26 +1,27 @@
-import './ContactSection.scss';
+import './ContactSection.scss'
+import InfoIcon from '../../components/InfoIcon'
+import { useEffect, useMemo, useState } from 'react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
+import { useDashboardUnsaved } from '../../contexts/DashboardUnsavedContext'
 
-import InfoIcon from '../../components/InfoIcon';
-
-import { useEffect, useMemo, useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
-
-import { Artist } from '../../types/artist';
+import { Artist } from '../../types/artist'
 import {
   getArtistBySlug,
   updateArtistBySlug,
-} from '../../services/artist.service';
+} from '../../services/artist.service'
 
 export default function ContactSection() {
-  const { t } = useTranslation();
-  const queryClient = useQueryClient();
-  const ARTIST_SLUG = 'mer';
+  const { t } = useTranslation()
+  const queryClient = useQueryClient()
+  const { setIsDirty } = useDashboardUnsaved()
 
-  const [initialData, setInitialData] = useState<any>(null);
-  const [justSaved, setJustSaved] = useState(false);
+  const ARTIST_SLUG = 'mer'
 
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [initialData, setInitialData] = useState<any>(null)
+  const [justSaved, setJustSaved] = useState(false)
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [socials, setSocials] = useState<any>({
     email: '',
     facebook: '',
@@ -28,40 +29,23 @@ export default function ContactSection() {
     spotify: '',
     soundcloud: '',
     youtube: '',
-  });
+  })
+
+  /* =======================
+     FETCH ARTIST
+  ======================= */
 
   const { data: artist, isLoading } = useQuery<Artist>({
     queryKey: ['artist-dashboard', ARTIST_SLUG],
     queryFn: () => getArtistBySlug(ARTIST_SLUG),
-  });
+  })
 
-  const updateMutation = useMutation({
-    mutationFn: (payload: any) =>
-      updateArtistBySlug(ARTIST_SLUG, payload),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['artist-dashboard', ARTIST_SLUG],
-      });
-      setJustSaved(true);
-      setTimeout(() => setJustSaved(false), 2000);
-    },
-    onError: (error: any) => {
-      const res =
-        error?.data ||
-        error?.response?.data ||
-        error;
-
-      if (!res?.field) return;
-
-      setErrors(prev => ({
-        ...prev,
-        [`socials.${res.field}`]: res.message,
-      }));
-    },
-  });
+  /* =======================
+     HYDRATE SNAPSHOT
+  ======================= */
 
   useEffect(() => {
-    if (!artist) return;
+    if (!artist) return
 
     const snapshot = {
       socials: {
@@ -72,25 +56,100 @@ export default function ContactSection() {
         soundcloud: artist.socials?.soundcloud || '',
         youtube: artist.socials?.youtube || '',
       },
-    };
+    }
 
-    setInitialData(snapshot);
-    setSocials(snapshot.socials);
-  }, [artist]);
+    setInitialData(snapshot)
+    setSocials(snapshot.socials)
+  }, [artist])
+
+  /* =======================
+     DIRTY DETECTION
+  ======================= */
 
   const isDirty = useMemo(() => {
-    if (!initialData) return false;
-    return JSON.stringify(socials) !== JSON.stringify(initialData.socials);
-  }, [socials, initialData]);
+    if (!initialData) return false
+    return JSON.stringify(socials) !== JSON.stringify(initialData.socials)
+  }, [socials, initialData])
+
+  /* =======================
+     SYNC DIRTY → DASHBOARD
+  ======================= */
+
+  useEffect(() => {
+    setIsDirty(isDirty)
+  }, [isDirty, setIsDirty])
+
+  /* =======================
+     BEFORE UNLOAD
+  ======================= */
+
+  useEffect(() => {
+    if (!isDirty) return
+
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+
+    window.addEventListener('beforeunload', handler)
+    return () => window.removeEventListener('beforeunload', handler)
+  }, [isDirty])
+
+  /* =======================
+     MUTATION
+  ======================= */
+
+  const updateMutation = useMutation({
+    mutationFn: (payload: any) =>
+      updateArtistBySlug(ARTIST_SLUG, payload),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['artist-dashboard', ARTIST_SLUG],
+      })
+
+      // 🔥 UPDATE SNAPSHOT
+      setInitialData({ socials })
+
+      // 🔥 CLEAR DIRTY
+      setIsDirty(false)
+
+      setJustSaved(true)
+      setTimeout(() => setJustSaved(false), 2000)
+    },
+
+    onError: (error: any) => {
+      const res =
+        error?.data ||
+        error?.response?.data ||
+        error
+
+      if (!res?.field) return
+
+      setErrors(prev => ({
+        ...prev,
+        [`socials.${res.field}`]: res.message,
+      }))
+    },
+  })
+
+  /* =======================
+     RESET
+  ======================= */
 
   const handleReset = () => {
-    if (!initialData) return;
-    setSocials(initialData.socials);
-    setErrors({});
-  };
+    if (!initialData) return
+    setSocials(initialData.socials)
+    setErrors({})
+    setIsDirty(false)
+  }
+
+  /* =======================
+     RENDER
+  ======================= */
 
   if (isLoading) {
-    return <p>{t('dashboard.contact.loading')}</p>;
+    return <p>{t('dashboard.contact.loading')}</p>
   }
 
   return (
@@ -106,7 +165,7 @@ export default function ContactSection() {
           <div className="form-group">
             <label>
               {t('dashboard.contact.email')}
-              <InfoIcon text={t('dashboard.contact.emailHint')}/>
+              <InfoIcon text={t('dashboard.contact.emailHint')} />
             </label>
             <input
               type="email"
@@ -131,12 +190,12 @@ export default function ContactSection() {
                 value={socials[key]}
                 className={errors[`socials.${key}`] ? 'error' : ''}
                 onChange={e => {
-                  setSocials({ ...socials, [key]: e.target.value });
+                  setSocials({ ...socials, [key]: e.target.value })
                   setErrors(prev => {
-                    const next = { ...prev };
-                    delete next[`socials.${key}`];
-                    return next;
-                  });
+                    const next = { ...prev }
+                    delete next[`socials.${key}`]
+                    return next
+                  })
                 }}
               />
               {errors[`socials.${key}`] && (
@@ -178,5 +237,5 @@ export default function ContactSection() {
         )}
       </div>
     </section>
-  );
+  )
 }

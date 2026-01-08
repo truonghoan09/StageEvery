@@ -173,10 +173,8 @@
 
     },
     "appearance": {
-      "dashboardTheme": "Text colors",
-      "artistTheme": "Artist page theme",
+      "titleColor": "Theme color",
       "title": "Appearance",
-      "themeColors": "Theme colors",
       "images": "Images",
 
       "bg": "Background",

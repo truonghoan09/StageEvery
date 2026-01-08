@@ -10,7 +10,7 @@ import ProfileSection from '../dashboard/sections/ProfileSection';
 import MusicSection from '../dashboard/sections/MusicSection';
 import ContactSection from '../dashboard/sections/ContactSection';
 import PreviewSection from '../dashboard/sections/PreviewSection';
-import AppearanceSection from '../dashboard/sections/AppearanceSection';
+import AppearanceSection from '../dashboard/sections/appearance/AppearanceSection';
 
 export default function AppRouter() {
   return (

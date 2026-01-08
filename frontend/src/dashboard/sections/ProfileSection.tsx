@@ -1,5 +1,5 @@
 import './ProfileSection.scss';
-
+import { useDashboardUnsaved } from '../../contexts/DashboardUnsavedContext';
 import InfoIcon from '../../components/InfoIcon';
 
 import { useEffect, useState, KeyboardEvent, useMemo } from 'react';
@@ -47,6 +47,18 @@ export default function ProfileSection() {
 
       setJustSaved(true);
       setTimeout(() => setJustSaved(false), 2000);
+      setInitialData({
+        name,
+        tagline,
+        bioShortVi,
+        bioShortEn,
+        bioFullVi,
+        bioFullEn,
+        genres,
+        location,
+      });
+
+      setIsDirty(false);
     },
   });
 
@@ -114,6 +126,13 @@ export default function ProfileSection() {
     initialData,
   ]);
 
+  const { setIsDirty } = useDashboardUnsaved();
+
+  useEffect(() => {
+    setIsDirty(isDirty);
+  }, [isDirty, setIsDirty]);
+
+
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
       if (!isDirty) return;
@@ -136,6 +155,7 @@ export default function ProfileSection() {
     setBioFullEn(initialData.bioFullEn);
     setGenres(initialData.genres);
     setLocation(initialData.location);
+    setIsDirty(false);
   };
 
   const handleAddGenre = (e: KeyboardEvent<HTMLInputElement>) => {

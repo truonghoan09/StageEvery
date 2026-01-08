@@ -1,0 +1,305 @@
+/* ================= BASE ================= */
+
+.appearance-section {
+  max-width: 1200px;
+  color: var(--text);
+
+  h2 {
+    margin-bottom: 24px;
+    font-size: 24px;
+  }
+}
+
+/* ================= LAYOUT ================= */
+
+.appearance-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ================= TOP NAV (TABS) ================= */
+
+.appearance-sidebar {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+
+  button {
+    padding: 8px 16px;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-soft);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    &:hover:not(.active) {
+      color: var(--text);
+      background: var(--bg-soft);
+    }
+
+    &.active {
+      background: var(--bg);
+      color: var(--text);
+      border-color: var(--border);
+      border-bottom-color: var(--bg);
+      font-weight: 600;
+      cursor: default;
+    }
+  }
+}
+
+/* ================= COLOR BLOCK ================= */
+
+.blockColor {
+  padding: 20px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+
+  h3 {
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+
+  .appearance-actions {
+    margin-top: 24px;
+  }
+}
+
+/* ================= GRID ================= */
+
+.appearance-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.appearance-controls--colors {
+  max-width: 320px;
+}
+
+/* ================= BLOCK ================= */
+
+.appearance-block {
+  margin-bottom: 24px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+
+  h3 {
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+}
+
+/* ================= FORM ================= */
+
+.color-row,
+.file-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+
+  label {
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+}
+
+input[type='color'] {
+  width: 56px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* ================= PREVIEW ================= */
+
+.appearance-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* DEVICE TOGGLE */
+
+.preview-device-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  button {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    color: var(--text);
+    font-size: 0.85rem;
+    cursor: pointer;
+
+    transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.12s ease;
+
+    &:hover:not(.active) {
+      background: var(--bg);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    &:active:not(.active) {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+    }
+
+    &.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+}
+
+/* ================= PREVIEW FRAME ================= */
+
+.appearance-preview-frame {
+  position: relative;
+  height: 640px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: #111;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= ACTIONS ================= */
+
+.appearance-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+
+  button {
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    color: var(--text);
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.12s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--bg);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  button:first-child {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--primary) 85%, black);
+    }
+  }
+
+  button:last-child {
+    background: transparent;
+
+    &:hover:not(:disabled) {
+      background: var(--bg-soft);
+    }
+  }
+}
+
+/* ================= IMAGES ================= */
+
+.appearance-images {
+  max-width: 480px;
+  padding: 20px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+
+  h3 {
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+
+  .appearance-block {
+    padding: 0;
+    margin-bottom: 0;
+    border: none;
+    background: transparent;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+  .appearance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .appearance-controls--colors {
+    max-width: none;
+  }
+
+  .appearance-preview-frame {
+    height: 520px;
+  }
+}
+
+/* ================= TAB BADGE ================= */
+
+.appearance-sidebar button {
+  position: relative;
+}
+
+.appearance-tab-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+
+.appearance-sidebar button.active .appearance-tab-badge {
+  background: #d8bc2e;
+}

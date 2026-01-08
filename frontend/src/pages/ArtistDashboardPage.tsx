@@ -1,10 +1,17 @@
-import DashboardLayout from '../layouts/DashboardLayout';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom'
+import DashboardLayout from '../layouts/DashboardLayout'
+import {
+  DashboardUnsavedProvider,
+} from '../contexts/DashboardUnsavedContext'
+
+
 
 export default function ArtistDashboardPage() {
   return (
-    <DashboardLayout>
-      <Outlet />
-    </DashboardLayout>
-  );
+    <DashboardUnsavedProvider>
+      <DashboardLayout>
+        <Outlet />
+      </DashboardLayout>
+    </DashboardUnsavedProvider>
+  )
 }

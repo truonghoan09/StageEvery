@@ -156,10 +156,9 @@
       "reset": "Khôi phục nội dung gốc"
     },
     "appearance": {
-      "dashboardTheme": "Màu chữ",
+      "titleColor": "Màu chủ đề",
       "artistTheme": "Giao diện trang nghệ sĩ",
       "title": "Giao diện",
-      "themeColors": "Màu sắc",
       "images": "Hình ảnh",
 
       "bg": "Màu nền",
