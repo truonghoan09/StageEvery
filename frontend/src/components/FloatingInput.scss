@@ -1,0 +1,70 @@
+.gg-input {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+
+  input {
+    min-height: 3rem;
+    width: 100%;
+    padding: 18px 12px 14px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #9e9e9e;
+    background: transparent;
+    color: #fff;
+    outline: none;
+
+    &:focus {
+      border-color: #1a73e8;
+      border-width: 2px;
+    }
+
+    &.has-error {
+      border-color: #d93025;
+      border-width: 2px;
+    }
+  }
+
+  /* Chrome autofill fix */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #3a3a3a inset;
+    -webkit-text-fill-color: #fff;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left top;
+    font-size: 15px;
+    line-height: 1;
+    color: #9e9e9e;
+    pointer-events: none;
+    transition: 0.2s ease;
+    padding: 0 5px;
+
+    background: transparent;
+  }
+
+  /* FLOAT STATE */
+  input:focus + label,
+  input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-60%) scale(0.8);
+  font-size: 12px;          // 👈 giảm font-size thật
+  line-height: 1;           // 👈 giữ thấp
+  padding: 0 4px;
+  height: auto;           // 👈 giảm padding
+  color: #1a73e8;
+  background: #3a3a3a;
+}
+
+  input.has-error + label {
+    color: #d93025;
+  }
+}

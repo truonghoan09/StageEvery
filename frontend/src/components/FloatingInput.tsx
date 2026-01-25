@@ -1,3 +1,5 @@
+import './FloatingInput.scss'
+
 interface FloatingInputProps {
   id: string
   label: string
@@ -33,7 +35,6 @@ export function FloatingInput({
         }}
       />
       <label htmlFor={id}>{label}</label>
-      {error && <p className="login-error">{error}</p>}
     </div>
   )
 }

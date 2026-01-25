@@ -22,7 +22,7 @@
       "status": {
         "sending": "Đang gửi email…",
         "sent": "Chúng tôi đã gửi link đăng nhập tới",
-        "resendIn": "Có thể gửi lại sau {{seconds}} giây",
+        "resendIn": "Có thể gửi lại sau {{time}}",
         "resend": "Gửi lại email"
       },
 
@@ -33,7 +33,8 @@
         "characters": "Tên Gmail chỉ được chứa chữ cái, số và dấu chấm.",
         "dotEdge": "Tên Gmail không được bắt đầu hoặc kết thúc bằng dấu chấm.",
         "dotConsecutive": "Tên Gmail không được chứa hai dấu chấm liên tiếp.",
-        "sendFail": "❌ Gửi email chưa thành công. Vui lòng thử lại sau."
+        "sendFail": "Gửi email chưa thành công. Vui lòng thử lại sau.",
+        "tooManyAttempts": "Bạn đã thử quá nhiều lần."
       },
 
       "dev": {

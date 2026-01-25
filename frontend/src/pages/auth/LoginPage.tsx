@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { formatDuration } from '../../utils/formatDuration'
 
 import { useAuth } from '../../contexts/AuthContext'
 import './LoginPage.scss'
+import { FloatingInput } from '../../components/FloatingInput'
+import { requestSendMagicLink } from '../../services/auth.service'
 
 function normalizeEmail(
   input: string,
@@ -86,13 +89,17 @@ export default function LoginPage() {
     flow,
     isAuthenticated,
     sendMagicLink,
-    failSendMagicLink,
     clickMagicLink,
   } = useAuth()
 
   const [input, setInput] = useState('')
   const [email, setEmail] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  type LoginError =
+  | { type: 'validation'; message: string }
+  | { type: 'rate_limit'; message: string }
+  | { type: 'send_fail'; message: string }
+
+  const [error, setError] = useState<LoginError | null>(null)
   const [cooldown, setCooldown] = useState(0)
 
   /* =========================================================
@@ -123,21 +130,51 @@ export default function LoginPage() {
      SEND (FAKE)
   ========================================================= */
 
-  const handleSend = () => {
+  const handleSend = async () => {
+    if (flow !== 'idle' && flow !== 'email_sent') return
+
     const result = normalizeEmail(input, t)
 
     if (result.error) {
-      setError(result.error)
+      setError({
+        type: 'validation',
+        message: result.error,
+      })
       setEmail(null)
       return
     }
 
-    setError(null)
-    setEmail(result.email!)
+    try {
+      const gate = await requestSendMagicLink()
 
-    sendMagicLink(result.email!)
-    setCooldown(60)
+      if (!gate.allowed) {
+        const seconds = gate.retryAfter ?? 60
+
+        setError({
+          type: 'rate_limit',
+          message: t('auth.login.errors.tooManyAttempts'),
+        })
+
+        setEmail(null)
+        setCooldown(seconds)
+        return
+      }
+
+      setError(null)
+      setEmail(result.email!)
+
+      sendMagicLink(result.email!)
+      setCooldown(60)
+    } catch {
+      setError({
+        type: 'send_fail',
+        message: t('auth.login.errors.sendFail'),
+      })
+    }
   }
+
+
+
 
   /* =========================================================
      RENDER
@@ -156,38 +193,31 @@ export default function LoginPage() {
 
         {flow === 'idle' && (
           <>
-            <div className="gg-input">
-                <input
-                    type="text"
-                    id="email"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder=" " 
-                    onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        handleSend()
-                    }
-                    }}
-                    className={error ? 'has-error' : ''}
-                    required
-                />
-                <label htmlFor="email">
-                    {t('auth.login.placeholder')}
-                </label>
-                </div>
+            <FloatingInput
+              id="email"
+              label={t('auth.login.placeholder')}
+              value={input}
+              onChange={setInput}
+              error={error?.type === 'validation' ? error.message : null}
+              onEnter={handleSend}
+            />
 
             {error && (
-              <p className="login-error">{error}</p>
+              <p className="login-error">{error.message}</p>
             )}
 
             <button
               className="login-button"
               onClick={handleSend}
+              disabled={error?.type === 'rate_limit'}
             >
-              {t('auth.login.submit')}
+              {error?.type === 'rate_limit'
+                ? t('auth.login.status.resendIn', { time: formatDuration(cooldown)})
+                : t('auth.login.submit')}
             </button>
           </>
         )}
+
 
         {flow === 'sending_email' && (
           <p className="login-status">
@@ -203,34 +233,23 @@ export default function LoginPage() {
             </div>
 
             <button
-              className="login-secondary"
-              onClick={clickMagicLink}
+              className="login-link"
+              onClick={handleSend}
+              disabled={cooldown > 0 || error?.type === 'rate_limit'}
             >
-              {t('auth.login.dev.fakeClick')}
+              {cooldown > 0
+                ? t('auth.login.status.resendIn', {
+                    time: formatDuration(cooldown),
+                  })
+                : t('auth.login.status.resend')}
             </button>
 
-            {cooldown > 0 ? (
-              <p className="login-hint">
-                {t('auth.login.status.resendIn', {
-                  seconds: cooldown,
-                })}
-              </p>
-            ) : (
-              <button
-                className="login-link"
-                onClick={handleSend}
-              >
-                {t('auth.login.status.resend')}
-              </button>
-            )}
           </>
         )}
 
-        {flow === 'email_failed' && (
+        {flow === 'email_failed' && error?.type === 'send_fail' && (
           <>
-            <p className="login-error">
-              {t('auth.login.errors.sendFail')}
-            </p>
+            <p className="login-error">{error.message}</p>
 
             <button
               className="login-button"
@@ -251,13 +270,6 @@ export default function LoginPage() {
             onClick={() => navigate('/auth/register')}
           >
             {t('auth.login.createProfile')}
-          </button>
-        </div>
-
-        {/* DEV */}
-        <div className="login-dev">
-          <button onClick={failSendMagicLink}>
-            {t('auth.login.dev.forceFail')}
           </button>
         </div>
       </div>

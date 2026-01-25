@@ -20,8 +20,8 @@
 
       "status": {
         "sending": "Sending email…",
-        "sent": "We’ve sent a sign-in link to",
-        "resendIn": "Resend available in {{seconds}} seconds",
+        "sent": "We’ve sent a sign-in link to:",
+        "resendIn": "Resend available in {{time}}",
         "resend": "Resend email"
       },
 
@@ -32,7 +32,8 @@
         "characters": "Gmail usernames can only contain letters, numbers, and dots.",
         "dotEdge": "Gmail usernames cannot start or end with a dot.",
         "dotConsecutive": "Gmail usernames cannot contain consecutive dots.",
-        "sendFail": "❌ Failed to send email."
+        "sendFail": "Failed to send email.",
+        "tooManyAttempts": "You’ve tried too many times."
       },
 
       "dev": {

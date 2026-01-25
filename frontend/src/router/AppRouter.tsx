@@ -15,6 +15,7 @@ import MusicSection from '../dashboard/sections/MusicSection';
 import ContactSection from '../dashboard/sections/ContactSection';
 import PreviewSection from '../dashboard/sections/PreviewSection';
 import AppearanceSection from '../dashboard/sections/appearance/AppearanceSection';
+import SystemProfileSection from '../dashboard/sections/SystemProfileSection'
 
 export default function AppRouter() {
   return (
@@ -31,6 +32,7 @@ export default function AppRouter() {
         <Route path="/dashboard" element={<ArtistDashboardPage />}>
           <Route index element={<Navigate to="profile" replace />} />
           <Route path="profile" element={<ProfileSection />} />
+          <Route path="system-profile" element={<SystemProfileSection />} />
           <Route path="appearance" element={<AppearanceSection />} />
           <Route path="music" element={<MusicSection />} />
           <Route path="contact" element={<ContactSection />} />
