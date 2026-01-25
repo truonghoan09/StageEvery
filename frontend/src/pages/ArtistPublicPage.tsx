@@ -29,14 +29,20 @@ export default function ArtistPublicPage({ previewSlug }: ArtistPublicPageProps)
 
   useEffect(() => {
     if (!isPreview) return
-  
+
     const onMessage = (event: MessageEvent) => {
-      if (event.data?.type !== 'PREVIEW_THEME') return
-      setPreviewTheme(event.data.tokens)
+      if (event.data?.type !== 'PREVIEW_THEME_UPDATE') return
+      setPreviewTheme(event.data.payload)
     }
-  
+
     window.addEventListener('message', onMessage)
     return () => window.removeEventListener('message', onMessage)
+  }, [isPreview])
+
+
+  useEffect(() => {
+    if (!isPreview) return
+    window.parent.postMessage({ type: 'PREVIEW_READY' }, '*')
   }, [isPreview])
 
   useEffect(() => {

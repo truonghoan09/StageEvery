@@ -7,6 +7,40 @@
     "toggleTheme": "Toggle theme",
     "language": "Language"
   },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Enter your Gmail address to receive a sign-in link.",
+      "placeholder": "example example@gmail.com",
+      "submit": "Send magic link",
+      "noAccount": "Don't have an account?",
+      "createProfile": "Create a free profile",
+
+      "hintGmailOnly": "Currently, only Gmail addresses are supported.",
+
+      "status": {
+        "sending": "Sending email…",
+        "sent": "We’ve sent a sign-in link to",
+        "resendIn": "Resend available in {{seconds}} seconds",
+        "resend": "Resend email"
+      },
+
+      "errors": {
+        "required": "Please enter your email.",
+        "gmailOnly": "Only Gmail addresses are supported.",
+        "length": "Gmail usernames must be between 6 and 30 characters.",
+        "characters": "Gmail usernames can only contain letters, numbers, and dots.",
+        "dotEdge": "Gmail usernames cannot start or end with a dot.",
+        "dotConsecutive": "Gmail usernames cannot contain consecutive dots.",
+        "sendFail": "❌ Failed to send email."
+      },
+
+      "dev": {
+        "fakeClick": "DEV: Fake click magic link",
+        "forceFail": "DEV: Force send failure"
+      }
+    }
+  },
   "homepage": {
     "seo": {
       "title": "StageEvery – Official Artist Website & EPK Platform",
@@ -173,9 +207,23 @@
 
     },
     "appearance": {
-      "titleColor": "Theme color",
       "title": "Appearance",
+      "titleColor": "Theme color",
+      "artistTheme": "Artist page theme",
+      "theme": "Theme",
+      "selectTheme": "Select theme",
+      "loadingTheme": "Loading theme colors…",
       "images": "Images",
+
+      "palette": {
+        "organicCalm": "Organic Calm",
+        "warmIndie": "Warm Indie",
+        "coolDigital": "Cool Digital",
+        "deepNight": "Deep Night",
+        "softDream": "Soft Dream",
+        "neutralBalance": "Neutral Balance",
+        "monochromeArt": "Monochrome Art"
+      },
 
       "bg": "Background",
       "bgSoft": "Soft background",
@@ -194,6 +242,10 @@
         "tagline": "Artist tagline goes here",
         "meta": "Genre • Location",
         "body": "This is sample content text for preview."
+      },
+      "actions": {
+        "save": "Save changes",
+        "reset": "Reset"
       }
     },
     "preview": {

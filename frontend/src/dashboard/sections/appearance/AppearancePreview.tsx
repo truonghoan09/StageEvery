@@ -1,73 +1,94 @@
 import './AppearancePreview.scss'
-import { forwardRef } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 
 type PreviewDevice = 'desktop' | 'tablet' | 'mobile'
 
-const DEVICE_VIEWPORTS: Record<
-  PreviewDevice,
-  { width: number; height: number }
-> = {
-  desktop: { width: 1280, height: 800 },
-  tablet: { width: 768, height: 1024 },
-  mobile: { width: 375, height: 812 },
-}
+const VIEWPORTS = {
+  desktop: { w: 1280, h: 800 },
+  tablet:  { w: 768,  h: 1024 },
+  mobile:  { w: 375,  h: 812 },
+} as const
 
 type Props = {
   slug: string
   device: PreviewDevice
-  desktopScale: number   // 🔥 GIỮ NGUYÊN – ĐÃ CHUẨN
 }
 
 const AppearancePreview = forwardRef<
   HTMLIFrameElement,
   Props
->(function AppearancePreview(
-  { slug, device, desktopScale },
-  iframeRef
-) {
-  const desktopViewport = DEVICE_VIEWPORTS.desktop
-  const viewport = DEVICE_VIEWPORTS[device]
+>(function AppearancePreview({ slug, device }, iframeRef) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [transform, setTransform] = useState('scale(1)')
 
-  /**
-   * 🔑 LOGIC CUỐI:
-   * - Desktop: dùng nguyên desktopScale
-   * - Tablet / Mobile: scale thêm theo CHIỀU CAO
-   */
-  const extraScale =
-    device === 'desktop'
-      ? 1
-      : desktopViewport.height / viewport.height
-
-  const scale = desktopScale * extraScale
-
-  const frameWidth = viewport.width * scale
-  const frameHeight = desktopViewport.height * desktopScale
-
+  const DESKTOP = VIEWPORTS.desktop
+  const viewport = VIEWPORTS[device]
   const src = `/artist/${slug}?preview=1`
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const update = () => {
+      const rect = containerRef.current!.getBoundingClientRect()
+      const cw = rect.width
+      const ch = rect.height
+
+      /* ===============================
+         1. SCALE CHUẨN CHO DESKTOP
+      =============================== */
+      const sDesktop = Math.min(
+        cw / DESKTOP.w,
+        ch / DESKTOP.h
+      )
+
+      /* ===============================
+         2. HEIGHT HIỂN THỊ CHUNG
+      =============================== */
+      const commonHeight = DESKTOP.h * sDesktop
+
+      containerRef.current!.style.height = `${commonHeight}px` 
+
+      /* ===============================
+         3. SCALE RIÊNG THEO DEVICE
+      =============================== */
+      const sDevice = commonHeight / viewport.h
+
+      /* ===============================
+         4. CANH GIỮA NGANG
+      =============================== */
+      const scaledWidth = viewport.w * sDevice
+      const tx = (cw - scaledWidth) / 2
+
+      setTransform(
+        `translateX(${tx}px) scale(${sDevice})`
+      )
+    }
+
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(containerRef.current)
+    return () => ro.disconnect()
+  }, [device])
 
   return (
     <div
-      className="appearance-preview-frame"
-      style={{
-        width: frameWidth,
-        height: frameHeight,
-        margin: '0 auto',
-      }}
+      ref={containerRef}
+      className="appearance-preview-container"
     >
       <iframe
         ref={iframeRef}
         title={`Artist preview ${device}`}
         src={src}
-        width={viewport.width}
-        height={viewport.height}
+        width={viewport.w}    // viewport THẬT
+        height={viewport.h}   // viewport THẬT
+        className="appearance-preview-iframe"
         style={{
-          border: 'none',
-          transform: `scale(${scale})`,
+          transform,
           transformOrigin: 'top left',
         }}
       />
     </div>
-   )
+  )
 })
 
 export default AppearancePreview

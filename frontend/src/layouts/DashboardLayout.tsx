@@ -1,53 +1,78 @@
 import { ReactNode } from 'react'
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { useDashboardUnsaved } from '../contexts/DashboardUnsavedContext';
-import { useTranslation } from 'react-i18next';
+import { NavLink, useNavigate, useLocation, Navigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
-import './DashboardLayout.scss';
+import { useDashboardUnsaved } from '../contexts/DashboardUnsavedContext'
+import { useAuth } from '../contexts/AuthContext'
+
+import './DashboardLayout.scss'
 
 type Props = {
   children: ReactNode
 }
 
-
-
 export default function DashboardLayout({ children }: Props) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const navigate = useNavigate()
   const location = useLocation()
+
   const { isDirty, setIsDirty } = useDashboardUnsaved()
 
+  const { status, logout } = useAuth()
+
+
+  /* =========================================================
+     AUTH GUARD (FAKE)
+     - chưa login thì redirect sang /auth/login
+  ========================================================= */
+
+  if (status === 'guest') {
+    return <Navigate to="/auth/login" replace />
+  }
+
+  /* =========================================================
+     NAV HANDLER (GIỮ NGUYÊN LOGIC CŨ)
+  ========================================================= */
+
   const handleNavClick = (
-  e: React.MouseEvent,
-  to: string
-    ) => {
-      if (location.pathname === to) return
+    e: React.MouseEvent,
+    to: string
+  ) => {
+    if (location.pathname === to) return
 
-      if (isDirty) {
-        const confirmLeave = window.confirm(
-          'You have unsaved changes. Are you sure you want to leave?'
-        )
+    if (isDirty) {
+      const confirmLeave = window.confirm(
+        'You have unsaved changes. Are you sure you want to leave?'
+      )
 
-        if (!confirmLeave) {
-          e.preventDefault()
-          return
-        }
-
-        // 🔥 CLEAR DIRTY VÌ USER ĐÃ CHẤP NHẬN BỎ THAY ĐỔI
-        setIsDirty(false)
+      if (!confirmLeave) {
+        e.preventDefault()
+        return
       }
 
-      e.preventDefault()
-      navigate(to)
+      // 🔥 CLEAR DIRTY VÌ USER ĐÃ CHẤP NHẬN BỎ THAY ĐỔI
+      setIsDirty(false)
     }
 
+    e.preventDefault()
+    navigate(to)
+  }
 
+  /* =========================================================
+     RENDER
+  ========================================================= */
 
   return (
     <div className="dashboard-layout">
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
+        <button
+          onClick={logout}
+          style={{ marginTop: 12 }}
+        >
+          Logout (fake)
+        </button>
         <h2 className="dashboard-title">
           {t('dashboard.layout.title')}
         </h2>
@@ -110,7 +135,6 @@ export default function DashboardLayout({ children }: Props) {
             </li>
           </ul>
         </nav>
-
       </aside>
 
       {/* Main */}
@@ -118,5 +142,5 @@ export default function DashboardLayout({ children }: Props) {
         {children}
       </main>
     </div>
-  );
+  )
 }

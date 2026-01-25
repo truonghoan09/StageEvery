@@ -7,6 +7,41 @@
     "toggleTheme": "Đổi giao diện",
     "language": "Ngôn ngữ"
   },
+  "auth": {
+    "login": {
+      "title": "Đăng nhập",
+      "subtitle": "Nhập Gmail hoặc số điện thoại để đăng nhập.",
+      "placeholder": "Gmail hoặc số điện thoại",
+      "submit": "Đăng nhập",
+      "noAccount": "Chưa có tài khoản?",
+      "createProfile": "Tạo hồ sơ miễn phí",
+
+
+      "hintGmailOnly": "",
+
+      "status": {
+        "sending": "Đang gửi email…",
+        "sent": "Chúng tôi đã gửi link đăng nhập tới",
+        "resendIn": "Có thể gửi lại sau {{seconds}} giây",
+        "resend": "Gửi lại email"
+      },
+
+      "errors": {
+        "required": "Vui lòng nhập email.",
+        "gmailOnly": "Chỉ hỗ trợ địa chỉ Gmail.",
+        "length": "Tên Gmail phải từ 6 đến 30 ký tự.",
+        "characters": "Tên Gmail chỉ được chứa chữ cái, số và dấu chấm.",
+        "dotEdge": "Tên Gmail không được bắt đầu hoặc kết thúc bằng dấu chấm.",
+        "dotConsecutive": "Tên Gmail không được chứa hai dấu chấm liên tiếp.",
+        "sendFail": "❌ Gửi email chưa thành công. Vui lòng thử lại sau."
+      },
+
+      "dev": {
+        "fakeClick": "DEV: Giả lập bấm link đăng nhập",
+        "forceFail": "DEV: Giả lập gửi email thất bại"
+      }
+    }
+  },
   "homepage": {
     "seo": {
       "title": "StageEvery – Website & EPK chính thức cho nghệ sĩ",
@@ -156,10 +191,23 @@
       "reset": "Khôi phục nội dung gốc"
     },
     "appearance": {
+      "title": "Giao diện",
       "titleColor": "Màu chủ đề",
       "artistTheme": "Giao diện trang nghệ sĩ",
-      "title": "Giao diện",
+      "theme": "Chủ đề",
+      "selectTheme": "Chọn chủ đề",
+      "loadingTheme": "Đang tải màu giao diện…",
       "images": "Hình ảnh",
+
+      "palette": {
+        "organicCalm": "Hữu cơ & Dịu nhẹ",
+        "warmIndie": "Ấm áp & Indie",
+        "coolDigital": "Lạnh & Kỹ thuật số",
+        "deepNight": "Đêm sâu",
+        "softDream": "Mơ màng & Mềm mại",
+        "neutralBalance": "Trung tính & Cân bằng",
+        "monochromeArt": "Đơn sắc & Nghệ thuật"
+      },
 
       "bg": "Màu nền",
       "bgSoft": "Nền phụ",
@@ -178,6 +226,10 @@
         "tagline": "Mô tả ngắn của nghệ sĩ",
         "meta": "Thể loại • Khu vực",
         "body": "Đây là nội dung mẫu để xem trước giao diện."
+      },
+      "actions": {
+        "save": "Lưu thay đổi",
+        "reset": "Hoàn tác"
       }
     },
     "contact": {

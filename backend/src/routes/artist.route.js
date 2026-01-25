@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const verifyFirebaseToken = require('../middlewares/verifyFirebaseToken')
 
 const {
   getArtistPublic,
@@ -6,6 +7,6 @@ const {
 } = require('../controllers/artist.controller');
 
 router.get('/:slug', getArtistPublic);
-router.put('/:slug', updateArtistBySlug);
+router.put('/:slug', verifyFirebaseToken, updateArtistBySlug);
 
 module.exports = router;

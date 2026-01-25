@@ -1,7 +1,9 @@
 {
   "organic-calm": {
-    "name": "Organic Calm",
-    "mood": ["organic", "calm", "nature"],
+    "labelKey": "palette.organicCalm",
+    "mood": ["calm"],
+    "style": ["organic"],
+    "context": ["nature"],
     "tokens": {
       "bg": "#0F2F2A",
       "bgSoft": "#163D35",
@@ -14,8 +16,10 @@
   },
 
   "warm-indie": {
-    "name": "Warm Indie",
-    "mood": ["warm", "nostalgic", "emotional"],
+    "labelKey": "palette.warmIndie",
+    "mood": ["warm", "nostalgic"],
+    "style": ["indie"],
+    "context": ["emotional"],
     "tokens": {
       "bg": "#2B1A12",
       "bgSoft": "#3A2418",
@@ -28,8 +32,10 @@
   },
 
   "cool-digital": {
-    "name": "Cool Digital",
-    "mood": ["cool", "digital", "producer"],
+    "labelKey": "palette.coolDigital",
+    "mood": ["cool"],
+    "style": ["digital"],
+    "context": ["producer"],
     "tokens": {
       "bg": "#0B1C2D",
       "bgSoft": "#12263A",
@@ -42,8 +48,10 @@
   },
 
   "deep-night": {
-    "name": "Deep Night",
-    "mood": ["dark", "cinematic", "experimental"],
+    "labelKey": "palette.deepNight",
+    "mood": ["dark"],
+    "style": ["cinematic"],
+    "context": ["experimental"],
     "tokens": {
       "bg": "#120B1E",
       "bgSoft": "#1C1430",
@@ -56,8 +64,10 @@
   },
 
   "soft-dream": {
-    "name": "Soft Dream",
-    "mood": ["soft", "dreamy", "emotional"],
+    "labelKey": "palette.softDream",
+    "mood": ["soft", "dreamy"],
+    "style": ["romantic"],
+    "context": ["emotional"],
     "tokens": {
       "bg": "#24151F",
       "bgSoft": "#2F1C28",
@@ -70,8 +80,10 @@
   },
 
   "neutral-balance": {
-    "name": "Neutral Balance",
-    "mood": ["neutral", "editorial", "safe"],
+    "labelKey": "palette.neutralBalance",
+    "mood": ["neutral"],
+    "style": ["editorial"],
+    "context": ["safe"],
     "tokens": {
       "bg": "#14161A",
       "bgSoft": "#1C1F26",
@@ -84,8 +96,10 @@
   },
 
   "monochrome-art": {
-    "name": "Monochrome Art",
-    "mood": ["monochrome", "art", "editorial"],
+    "labelKey": "palette.monochromeArt",
+    "mood": ["neutral"],
+    "style": ["monochrome", "art"],
+    "context": ["editorial"],
     "tokens": {
       "bg": "#0E0E10",
       "bgSoft": "#1A1A1E",

@@ -114,3 +114,29 @@ export interface ArtistTheme {
   textMuted?: string
   primary?: string
 }
+
+
+
+/**
+ * Payload dùng cho update Artist
+ * - Chỉ chứa field backend cho phép update
+ * - Không dùng cho read
+ */
+export type ArtistUpdatePayload = Partial<{
+  name: Artist['name'];
+
+  tagline: Artist['tagline'];
+  bio: Artist['bio'];
+
+  avatar: string; // upload xong → URL
+  cover: string;
+
+  socials: Artist['socials'];
+
+  theme: {
+    paletteId: string;
+  };
+
+  tracks: Artist['tracks'];
+  videos: any[]; // giữ any cho future
+}>;

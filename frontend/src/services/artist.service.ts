@@ -23,16 +23,14 @@ export async function getArtistBySlug(
   return res.json();
 }
 
+//......................................................................
+
+
+import { ArtistUpdatePayload } from '../types/artist';
 
 export async function updateArtistBySlug(
   slug: string,
-  payload: Partial<{
-    name: string;
-    tagline: {
-      vi?: string;
-      en?: string;
-    };
-  }>
+  payload: ArtistUpdatePayload
 ) {
   const res = await fetch(
     `${import.meta.env.VITE_API_BASE_URL}/artist/${slug}`,
@@ -48,7 +46,7 @@ export async function updateArtistBySlug(
   const data = await res.json();
 
   if (!res.ok) {
-    throw data; // 👈 GIỮ NGUYÊN LỖI BACKEND
+    throw data;
   }
 
   return data;

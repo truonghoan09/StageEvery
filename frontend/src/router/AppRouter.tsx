@@ -6,6 +6,10 @@ import HomePage from '../pages/HomePage';
 import ArtistPublicPage from '../pages/ArtistPublicPage';
 import ArtistDashboardPage from '../pages/ArtistDashboardPage';
 
+import AuthLayout from '../layouts/AuthLayout';
+import LoginPage from '../pages/auth/LoginPage';
+import RegisterPage from '../pages/auth/RegisterPage';
+
 import ProfileSection from '../dashboard/sections/ProfileSection';
 import MusicSection from '../dashboard/sections/MusicSection';
 import ContactSection from '../dashboard/sections/ContactSection';
@@ -18,6 +22,12 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/artist/:slug" element={<ArtistPublicPage />} />
+
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+        </Route>
+
         <Route path="/dashboard" element={<ArtistDashboardPage />}>
           <Route index element={<Navigate to="profile" replace />} />
           <Route path="profile" element={<ProfileSection />} />

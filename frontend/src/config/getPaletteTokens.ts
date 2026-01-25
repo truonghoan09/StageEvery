@@ -10,6 +10,11 @@ type PaletteTokens = {
   primary: string;
 };
 
+export type PaletteOption = {
+  id: string;
+  label: string;
+};
+
 export function getPaletteTokens(
   paletteId?: string
 ): PaletteTokens | null {
@@ -24,4 +29,18 @@ export function getPaletteTokens(
   }
 
   return palette.tokens;
+}
+
+
+/* =========================
+   GET ALL PALETTES (for <select>)
+========================= */
+
+export function getPaletteOptions(): PaletteOption[] {
+  return Object.entries(palettes).map(
+    ([id, value]: any) => ({
+      id,
+      label: value.name ?? id,
+    })
+  );
 }

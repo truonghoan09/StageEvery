@@ -1,33 +1,33 @@
-/* ================= FRAME ================= */
-/* Khung hiển thị scaled */
+/* ================= RESET ================= */
 
-.appearance-preview-frame::before {
-  content: none !important;
-  display: none !important;
-}
-
-.appearance-preview-frame {
-  overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: #111;
-}
-
-
-/* ================= VIEWPORT THẬT ================= */
-
-.appearance-preview-viewport {
-  background: var(--artist-bg, #fff);
-}
-
-/* ================= SCROLL (GIỐNG BROWSER) ================= */
-
-.appearance-preview-scroll {
-  width: 100%;
+.appearance-preview {
   height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  min-height: 0;
+}
 
-  /* QUAN TRỌNG: scrollbar nằm TRONG viewport */
-  scrollbar-gutter: stable;
+/* ================= CONTAINER ================= */
+
+.appearance-preview-container {
+  position: relative;
+  overflow: hidden;
+
+  /* nền trung tính */
+  background: transparent;
+}
+
+/* ================= IFRAME (DEVICE PREVIEW) ================= */
+
+.appearance-preview-iframe {
+  display: block;
+
+  /* 👇 RẤT QUAN TRỌNG: KHÔNG absolute */
+  position: relative;
+
+  border: none;
+  background: #111;
+
+  /* 👇 UI đẹp */
+  border-radius: 16px;
+  /* 👇 chỉ animate transform, không animate size */
+  transition: transform 0.25s ease;
 }
