@@ -7,6 +7,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import './LoginPage.scss'
 import { FloatingInput } from '../../components/FloatingInput'
 import { requestSendMagicLink } from '../../services/auth.service'
+import GoogleLoginButton from '../../components/GoogleLoginButton'
 
 function normalizeEmail(
   input: string,
@@ -204,6 +205,14 @@ export default function LoginPage() {
             {error && (
               <p className="login-error">{error.message}</p>
             )}
+
+            <div className="login-divider">
+              <span>or</span>
+            </div>
+
+            <div className="login-google">
+              <GoogleLoginButton />
+            </div>
 
             <button
               className="login-button"
