@@ -89,7 +89,6 @@ export default function LoginPage() {
     flow,
     isAuthenticated,
     sendMagicLink,
-    clickMagicLink,
   } = useAuth()
 
   const [input, setInput] = useState('')
@@ -198,7 +197,7 @@ export default function LoginPage() {
               label={t('auth.login.placeholder')}
               value={input}
               onChange={setInput}
-              error={error?.type === 'validation' ? error.message : null}
+              error={error?.type === 'validation'}
               onEnter={handleSend}
             />
 

@@ -6,7 +6,8 @@ interface FloatingInputProps {
   value: string
   onChange: (value: string) => void
   type?: string
-  error?: string | null
+  placeholder?: string
+  error?: boolean | null
   onEnter?: () => void
 }
 
@@ -16,6 +17,7 @@ export function FloatingInput({
   value,
   onChange,
   type = 'text',
+  placeholder = ' ',
   error,
   onEnter,
 }: FloatingInputProps) {
@@ -25,7 +27,7 @@ export function FloatingInput({
         id={id}
         type={type}
         value={value}
-        placeholder=" "
+        placeholder={placeholder}
         className={error ? 'has-error' : ''}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={(e) => {

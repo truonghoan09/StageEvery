@@ -4,17 +4,8 @@ import {
   useEffect,
   useState,
 } from 'react'
-import {
-  sendSignInLinkToEmail,
-  isSignInWithEmailLink,
-  signInWithEmailLink,
-  signOut,
-} from 'firebase/auth'
 
-import { notifyLoginSuccess } from '../services/auth.service'
-import { auth } from '../firebase/firebaseClient'
-
-
+import { getAuthAdapter } from '../auth/getAuthAdapter'
 
 export type AuthFlowState =
   | 'idle'
@@ -27,12 +18,12 @@ type AuthContextValue = {
   flow: AuthFlowState
   isAuthenticated: boolean
   sendMagicLink: (email: string) => Promise<void>
-  clickMagicLink: () => Promise<void>
   logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
+const authAdapter = getAuthAdapter()
 
 export function AuthProvider({
   children,
@@ -40,70 +31,20 @@ export function AuthProvider({
   children: React.ReactNode
 }) {
   const [flow, setFlow] = useState<AuthFlowState>('idle')
-  const [emailForSignIn, setEmailForSignIn] = useState<string | null>(null)
 
   const isAuthenticated = flow === 'authenticated'
 
   /* =========================
-     SEND MAGIC LINK (REAL)
+     SEND MAGIC LINK
   ========================= */
 
   const sendMagicLink = async (email: string) => {
     try {
       setFlow('sending_email')
-
-      await sendSignInLinkToEmail(auth, email, {
-        url: window.location.origin + '/auth/login',
-        handleCodeInApp: true,
-      })
-
-      window.localStorage.setItem(
-        'emailForSignIn',
-        email
-      )
-
-      setEmailForSignIn(email)
+      await authAdapter.sendMagicLink(email)
       setFlow('email_sent')
     } catch (err) {
-      console.error('[AUTH] send magic link failed', err)
-      setFlow('email_failed')
-    }
-  }
-
-  /* =========================
-     CLICK MAGIC LINK (REAL)
-  ========================= */
-
-  const clickMagicLink = async () => {
-    try {
-      if (!isSignInWithEmailLink(auth, window.location.href)) {
-        return
-      }
-
-      const storedEmail =
-        emailForSignIn ||
-        window.localStorage.getItem('emailForSignIn')
-
-      if (!storedEmail) {
-        throw new Error('Missing email for sign-in')
-      }
-
-      const result = await signInWithEmailLink(
-        auth,
-        storedEmail,
-        window.location.href
-      )
-
-      window.localStorage.removeItem('emailForSignIn')
-
-      const user = result.user
-      const idToken = await user.getIdToken()
-
-      // 🔔 RESET RATE LIMIT ON BACKEND
-      await notifyLoginSuccess(idToken)
-      setFlow('authenticated')
-    } catch (err) {
-      console.error('[AUTH] sign-in failed', err)
+      console.error('[AUTH] sendMagicLink failed', err)
       setFlow('email_failed')
     }
   }
@@ -113,10 +54,14 @@ export function AuthProvider({
   ========================= */
 
   useEffect(() => {
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-      clickMagicLink()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    authAdapter
+      .clickMagicLink()
+      .then(() => {
+        setFlow('authenticated')
+      })
+      .catch(() => {
+        // ignore
+      })
   }, [])
 
   /* =========================
@@ -124,7 +69,7 @@ export function AuthProvider({
   ========================= */
 
   const logout = async () => {
-    await signOut(auth)
+    await authAdapter.logout()
     setFlow('idle')
   }
 
@@ -134,7 +79,6 @@ export function AuthProvider({
         flow,
         isAuthenticated,
         sendMagicLink,
-        clickMagicLink,
         logout,
       }}
     >

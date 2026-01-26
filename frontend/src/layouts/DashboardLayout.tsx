@@ -8,70 +8,57 @@ import { useAuth } from '../contexts/AuthContext'
 import './DashboardLayout.scss'
 
 type Props = {
-  children: ReactNode
+  children:
+    | ReactNode
+    | ((args: { refreshSystemProfile: () => Promise<void> }) => ReactNode)
 }
 
 export default function DashboardLayout({ children }: Props) {
   const { t } = useTranslation()
-
   const navigate = useNavigate()
   const location = useLocation()
 
   const { isDirty, setIsDirty } = useDashboardUnsaved()
+  const { isAuthenticated } = useAuth()
 
-  const { isAuthenticated, logout } = useAuth()
   const [hasSystemProfile, setHasSystemProfile] =
-  useState<boolean | null>(null)
-
+    useState<boolean | null>(null)
 
   const [missingFields, setMissingFields] = useState<string[]>([])
 
-
-
   /* =========================================================
-     AUTH GUARD (FAKE)
-     - chưa login thì redirect sang /auth/login
+     EFFECT: CHECK SYSTEM PROFILE
   ========================================================= */
 
-  if (!isAuthenticated) {
-    return <Navigate to="/auth/login" replace />
-  }
-
-  if (
-    hasSystemProfile === false &&
-    location.pathname !== '/dashboard/system-profile'
-  ) {
-    return <Navigate to="/dashboard/system-profile" replace />
-  }
-
   useEffect(() => {
-  if (!isAuthenticated) return
+    if (!isAuthenticated) return
 
-  const checkSystemProfile = async () => {
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/me`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('firebaseIdToken') ?? ''}`,
-          },
-        }
-      )
+    const checkSystemProfile = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/me`,
+          {
+            headers: {
+              // 🔥 FAKE AUTH TOKEN
+              Authorization: 'Bearer FAKE_TOKEN',
+            },
+          }
+        )
 
-      const data = await res.json()
-      setHasSystemProfile(data.hasProfile)
-      setMissingFields(data.missingFields ?? [])
-    } catch (err) {
-      console.error('[DASHBOARD] /me failed', err)
-      setHasSystemProfile(false)
+        const data = await res.json()
+        setHasSystemProfile(data.hasProfile)
+        setMissingFields(data.missingFields ?? [])
+      } catch (err) {
+        console.error('[DASHBOARD] /me failed', err)
+        setHasSystemProfile(false)
+      }
     }
-  }
 
-  checkSystemProfile()
-}, [isAuthenticated])
+    checkSystemProfile()
+  }, [isAuthenticated, location.pathname])
 
   /* =========================================================
-     NAV HANDLER (GIỮ NGUYÊN LOGIC CŨ)
+     NAV HANDLER
   ========================================================= */
 
   const handleNavClick = (
@@ -90,19 +77,17 @@ export default function DashboardLayout({ children }: Props) {
         return
       }
 
-      // 🔥 CLEAR DIRTY VÌ USER ĐÃ CHẤP NHẬN BỎ THAY ĐỔI
       setIsDirty(false)
     }
 
     e.preventDefault()
     navigate(to)
   }
-  
+
   const isLocked = (path: string) => {
     if (hasSystemProfile !== false) return false
     return path !== '/dashboard/system-profile'
   }
-
 
   const refreshSystemProfile = async () => {
     try {
@@ -110,7 +95,7 @@ export default function DashboardLayout({ children }: Props) {
         `${import.meta.env.VITE_API_BASE_URL}/me`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('firebaseIdToken') ?? ''}`,
+            Authorization: 'Bearer FAKE_TOKEN',
           },
         }
       )
@@ -121,16 +106,23 @@ export default function DashboardLayout({ children }: Props) {
     }
   }
 
-  
-    /* =========================================================
-       RENDER
-    ========================================================= */
+  /* =========================================================
+     RENDER
+  ========================================================= */
+
+  // ⛔ Auth guard phải nằm trong JSX
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" replace />
+  }
+
+  if (hasSystemProfile === null) {
+    return <div style={{ padding: 24 }}>Loading...</div>
+  }
 
   return (
     <div className="dashboard-layout">
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
-        
         <h2 className="dashboard-title">
           {t('dashboard.layout.title')}
         </h2>
@@ -141,120 +133,51 @@ export default function DashboardLayout({ children }: Props) {
               <NavLink
                 to="/dashboard/system-profile"
                 onClick={(e) =>
-                  handleNavClick(e, '/dashboard/system-profile')
+                  handleNavClick(
+                    e,
+                    '/dashboard/system-profile'
+                  )
                 }
               >
                 System Profile
               </NavLink>
             </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/profile"
-                onClick={(e) => {
-                  if (isLocked('/dashboard/profile')) {
-                    e.preventDefault()
-                    return
-                  }
-                  handleNavClick(e, '/dashboard/profile')
-                }}
-                className={isLocked('/dashboard/profile') ? 'disabled' : ''}
-                title={
-                  isLocked('/dashboard/profile')
-                    ? t('dashboard.systemProfileRequired')
-                    : undefined
-                }
-              >
-                {t('dashboard.layout.profile')}
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/dashboard/appearance"
-                onClick={(e) => {
-                  if (isLocked('/dashboard/appearance')) {
-                    e.preventDefault()
-                    return
-                  }
-                  handleNavClick(e, '/dashboard/appearance')
-                }}
-                className={isLocked('/dashboard/appearance') ? 'disabled' : ''}
-                title={
-                  isLocked('/dashboard/appearance')
-                    ? t('dashboard.systemProfileRequired')
-                    : undefined
-                }
-              >
-                {t('dashboard.layout.appearance')}
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/dashboard/music"
-                onClick={(e) => {
-                  if (isLocked('/dashboard/music')) {
-                    e.preventDefault()
-                    return
-                  }
-                  handleNavClick(e, '/dashboard/music')
-                }}
-                className={isLocked('/dashboard/music') ? 'disabled' : ''}
-                title={
-                  isLocked('/dashboard/music')
-                    ? t('dashboard.systemProfileRequired')
-                    : undefined
-                }
-              >
-                {t('dashboard.layout.music')}
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/dashboard/contact"
-                onClick={(e) => {
-                  if (isLocked('/dashboard/contact')) {
-                    e.preventDefault()
-                    return
-                  }
-                  handleNavClick(e, '/dashboard/contact')
-                }}
-                className={isLocked('/dashboard/contact') ? 'disabled' : ''}
-                title={
-                  isLocked('/dashboard/contact')
-                    ? t('dashboard.systemProfileRequired')
-                    : undefined
-                }
-              >
-                {t('dashboard.layout.contact')}
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/dashboard/preview"
-                onClick={(e) => {
-                  if (isLocked('/dashboard/preview')) {
-                    e.preventDefault()
-                    return
-                  }
-                  handleNavClick(e, '/dashboard/preview')
-                }}
-                className={isLocked('/dashboard/preview') ? 'disabled' : ''}
-                title={
-                  isLocked('/dashboard/preview')
-                    ? t('dashboard.systemProfileRequired')
-                    : undefined
-                }
-              >
-                {t('dashboard.layout.preview')}
-              </NavLink>
-            </li>
+            {[
+              'profile',
+              'appearance',
+              'music',
+              'contact',
+              'preview',
+            ].map((key) => {
+              const path = `/dashboard/${key}`
+              return (
+                <li key={key}>
+                  <NavLink
+                    to={path}
+                    onClick={(e) => {
+                      if (isLocked(path)) {
+                        e.preventDefault()
+                        return
+                      }
+                      handleNavClick(e, path)
+                    }}
+                    className={isLocked(path) ? 'disabled' : ''}
+                    title={
+                      isLocked(path)
+                        ? t(
+                            'dashboard.systemProfileRequired'
+                          )
+                        : undefined
+                    }
+                  >
+                    {t(`dashboard.layout.${key}`)}
+                  </NavLink>
+                </li>
+              )
+            })}
           </ul>
         </nav>
-
       </aside>
 
       {/* Main */}
@@ -268,16 +191,26 @@ export default function DashboardLayout({ children }: Props) {
               )}
             </span>
             <button
-              onClick={() => navigate('/dashboard/system-profile')}
+              onClick={() =>
+                navigate('/dashboard/system-profile')
+              }
             >
               {t('dashboard.completeProfile')}
             </button>
           </div>
         )}
 
-        {typeof children === 'function'
-        ? children({ refreshSystemProfile })
-        : children}
+        {hasSystemProfile === false &&
+          location.pathname !== '/dashboard/system-profile' ? (
+            <Navigate
+              to="/dashboard/system-profile"
+              replace
+            />
+          ) : typeof children === 'function' ? (
+            children({ refreshSystemProfile })
+          ) : (
+            children
+          )}
       </main>
     </div>
   )

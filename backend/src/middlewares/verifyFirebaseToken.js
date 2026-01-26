@@ -11,6 +11,18 @@ async function verifyFirebaseToken(req, res, next) {
 
   const token = authHeader.split(' ')[1]
 
+  // ✅ FAKE AUTH (DEV ONLY)
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    token === 'FAKE_TOKEN'
+  ) {
+    req.auth = {
+      uid: 'fake-user-123',
+      email: 'fake@stageevery.dev',
+    }
+    return next()
+  }
+
   try {
     const decoded = await admin.auth().verifyIdToken(token)
 
