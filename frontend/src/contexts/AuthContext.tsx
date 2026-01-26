@@ -53,16 +53,16 @@ export function AuthProvider({
      AUTO-DETECT MAGIC LINK
   ========================= */
 
-  useEffect(() => {
-    authAdapter
-      .clickMagicLink()
-      .then(() => {
-        setFlow('authenticated')
-      })
-      .catch(() => {
-        // ignore
-      })
-  }, [])
+  // useEffect(() => {
+  //   authAdapter
+  //     .clickMagicLink()
+  //     .then(() => {
+  //       setFlow('authenticated')
+  //     })
+  //     .catch(() => {
+  //       // ignore
+  //     })
+  // }, [])
 
   /* =========================
      LOGOUT
