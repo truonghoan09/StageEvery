@@ -1,5 +1,4 @@
 export interface AuthAdapter {
-  sendMagicLink(email: string): Promise<void>
-  clickMagicLink(): Promise<void>
+  login(idToken: string): Promise<any>
   logout(): Promise<void>
 }

@@ -19,16 +19,12 @@ export default function DashboardLayout({ children }: Props) {
   const location = useLocation()
 
   const { isDirty, setIsDirty } = useDashboardUnsaved()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, logout } = useAuth()
 
   const [hasSystemProfile, setHasSystemProfile] =
     useState<boolean | null>(null)
 
   const [missingFields, setMissingFields] = useState<string[]>([])
-
-  /* =========================================================
-     EFFECT: CHECK SYSTEM PROFILE
-  ========================================================= */
 
   useEffect(() => {
     if (!isAuthenticated) return
@@ -39,8 +35,7 @@ export default function DashboardLayout({ children }: Props) {
           `${import.meta.env.VITE_API_BASE_URL}/me`,
           {
             headers: {
-              // 🔥 FAKE AUTH TOKEN
-              Authorization: 'Bearer FAKE_TOKEN',
+              'x-user-id': localStorage.getItem('userId') ?? '',
             },
           }
         )
@@ -56,10 +51,6 @@ export default function DashboardLayout({ children }: Props) {
 
     checkSystemProfile()
   }, [isAuthenticated, location.pathname])
-
-  /* =========================================================
-     NAV HANDLER
-  ========================================================= */
 
   const handleNavClick = (
     e: React.MouseEvent,
@@ -95,7 +86,7 @@ export default function DashboardLayout({ children }: Props) {
         `${import.meta.env.VITE_API_BASE_URL}/me`,
         {
           headers: {
-            Authorization: 'Bearer FAKE_TOKEN',
+            'x-user-id': localStorage.getItem('userId') ?? '',
           },
         }
       )
@@ -106,11 +97,6 @@ export default function DashboardLayout({ children }: Props) {
     }
   }
 
-  /* =========================================================
-     RENDER
-  ========================================================= */
-
-  // ⛔ Auth guard phải nằm trong JSX
   if (!isAuthenticated) {
     return <Navigate to="/auth/login" replace />
   }
@@ -121,7 +107,6 @@ export default function DashboardLayout({ children }: Props) {
 
   return (
     <div className="dashboard-layout">
-      {/* Sidebar */}
       <aside className="dashboard-sidebar">
         <h2 className="dashboard-title">
           {t('dashboard.layout.title')}
@@ -178,9 +163,21 @@ export default function DashboardLayout({ children }: Props) {
             })}
           </ul>
         </nav>
+
+        {/* Logout */}
+        <div className="dashboard-logout">
+          <button
+            className="dashboard-logout-button"
+            onClick={() => {
+              logout()
+              navigate('/auth/login', { replace: true })
+            }}
+          >
+            Logout
+          </button>
+        </div>
       </aside>
 
-      {/* Main */}
       <main className="dashboard-main">
         {hasSystemProfile === false && (
           <div className="dashboard-warning">

@@ -1,57 +1,56 @@
-const admin = require('firebase-admin')
+const { db } = require('../firebase/firebase')
 
-const db = admin.firestore()
-
+/**
+ * GET /me
+ * Requires requireAuth middleware
+ */
 exports.getMe = async (req, res) => {
   try {
-    const { uid, email } = req.auth
+    // 🔥 ĐÃ VERIFY Ở requireAuth
+    const user = req.user
 
-    const ref = db.collection('users').doc(uid)
-    const snap = await ref.get()
+    if (!user || !user.id) {
+      return res.status(401).json({
+        error: 'UNAUTHENTICATED',
+      })
+    }
 
-    // ❌ Chưa có system profile
+    const userRef = db.collection('users').doc(user.id)
+    const snap = await userRef.get()
+
     if (!snap.exists) {
-      return res.json({
-        hasProfile: false,
-        missingFields: [
-          'firstName',
-          'lastName',
-          'phone',
-          'dob',
-        ],
+      return res.status(404).json({
+        error: 'USER_NOT_FOUND',
       })
     }
 
     const data = snap.data()
 
-    // 🔍 Check thiếu field (phòng data cũ / incomplete)
-    const requiredFields = [
-      'firstName',
-      'lastName',
-      'phone',
-      'dob',
-    ]
+    const hasProfile =
+      Boolean(data.firstName) &&
+      Boolean(data.lastName) &&
+      Boolean(data.phone) &&
+      Boolean(data.dob)
 
-    const missingFields = requiredFields.filter(
-      (field) => !data[field]
-    )
+    const missingFields = []
+    if (!data.firstName) missingFields.push('firstName')
+    if (!data.lastName) missingFields.push('lastName')
+    if (!data.phone) missingFields.push('phone')
+    if (!data.dob) missingFields.push('dob')
 
-    if (missingFields.length > 0) {
-      return res.json({
-        hasProfile: false,
-        missingFields,
-      })
-    }
-
-    // ✅ OK
     return res.json({
-      hasProfile: true,
-      user: data,
+      user: {
+        id: data.id,
+        email: data.email,
+        name: data.name,
+      },
+      hasProfile,
+      missingFields,
     })
   } catch (err) {
     console.error('[ME] getMe failed', err)
     return res.status(500).json({
-      message: 'Failed to get user profile',
+      error: 'INTERNAL_ERROR',
     })
   }
 }

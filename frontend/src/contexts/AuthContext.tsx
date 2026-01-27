@@ -1,63 +1,36 @@
-import {
-  createContext,
-  useContext,
-  useState,
-} from 'react'
+import { createContext, useContext, useState } from 'react'
+import { FirebaseAuthAdapter } from '../auth/FirebaseAuthAdapter'
 
-import { getAuthAdapter } from '../auth/getAuthAdapter'
-
-export type AuthFlowState =
-  | 'idle'
-  | 'authenticating'
-  | 'authenticated'
-
-type AuthContextValue = {
-  flow: AuthFlowState
+type AuthContextType = {
   isAuthenticated: boolean
-  sendMagicLink: (email: string) => Promise<void>
-  logout: () => Promise<void>
+  login: (idToken: string) => Promise<void>
+  logout: () => void
 }
 
-const AuthContext = createContext<AuthContextValue | null>(null)
+const AuthContext = createContext<AuthContextType | null>(null)
 
-const authAdapter = getAuthAdapter()
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const authAdapter = new FirebaseAuthAdapter()
 
-export function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const [flow, setFlow] = useState<AuthFlowState>('idle')
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return Boolean(localStorage.getItem('userId'))
+  })
 
-  const isAuthenticated = flow === 'authenticated'
-
-  /* =========================
-     SEND MAGIC LINK (DISABLED)
-     — giữ để UI không vỡ
-  ========================= */
-
-  const sendMagicLink = async (email: string) => {
-    console.warn(
-      '[AUTH] Magic link disabled. OAuth only.',
-      email
-    )
+  async function login(idToken: string) {
+    await authAdapter.login(idToken)
+    setIsAuthenticated(true)
   }
 
-  /* =========================
-     LOGOUT
-  ========================= */
-
-  const logout = async () => {
-    await authAdapter.logout()
-    setFlow('idle')
+  function logout() {
+    authAdapter.logout()
+    setIsAuthenticated(false)
   }
 
   return (
     <AuthContext.Provider
       value={{
-        flow,
         isAuthenticated,
-        sendMagicLink,
+        login,
         logout,
       }}
     >
@@ -68,8 +41,6 @@ export function AuthProvider({
 
 export function useAuth() {
   const ctx = useContext(AuthContext)
-  if (!ctx) {
-    throw new Error('useAuth must be used inside AuthProvider')
-  }
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider')
   return ctx
 }

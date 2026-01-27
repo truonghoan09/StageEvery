@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const verifyFirebaseToken = require('../middlewares/verifyFirebaseToken')
 const { createUserProfile } = require('../controllers/users.controller')
+const requireAuth = require('../middlewares/requireAuth')
 
-router.post('/', verifyFirebaseToken, createUserProfile)
+router.post('/', requireAuth, createUserProfile)
 
 module.exports = router

@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const verifyFirebaseToken = require('../middlewares/verifyFirebaseToken')
 const { getMe } = require('../controllers/me.controller')
+const requireAuth = require('../middlewares/requireAuth')
 
-router.get('/', verifyFirebaseToken, getMe)
+router.get('/', requireAuth, getMe)
 
 module.exports = router

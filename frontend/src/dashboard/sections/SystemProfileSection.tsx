@@ -281,7 +281,7 @@ export default function SystemProfileSection({
         <FloatingInput
           id="firstName"
           label={t('dashboard.systemProfile.firstName')}
-          value={firstName}
+          value={firstName ?? ''}
           onChange={(v) => {
             setFirstName(v)
             if (isValidName(v)) {
@@ -294,7 +294,7 @@ export default function SystemProfileSection({
         <FloatingInput
           id="lastName"
           label={t('dashboard.systemProfile.lastName')}
-          value={lastName}
+          value={lastName ?? ''}
           onChange={(v) => {
             setLastName(v)
             if (isValidName(v)) {
@@ -307,7 +307,7 @@ export default function SystemProfileSection({
         <FloatingInput
           id="phone"
           label={t('dashboard.systemProfile.phone')}
-          value={phone}
+          value={phone ?? ''}
           onChange={(v) => {
             const normalized = normalizePhoneVN(v)
             setPhone(normalized)
@@ -331,7 +331,7 @@ export default function SystemProfileSection({
               inputMode="numeric"
               maxLength={2}
               placeholder="DD"
-              value={dobDay}
+              value={dobDay ?? ''}
               onChange={handleDayChange}
               onKeyDown={(e) =>
                 handleBackspace(e, 'day')
@@ -346,7 +346,7 @@ export default function SystemProfileSection({
               inputMode="numeric"
               maxLength={2}
               placeholder="MM"
-              value={dobMonth}
+              value={dobMonth ?? ''}
               onChange={handleMonthChange}
               onKeyDown={(e) =>
                 handleBackspace(e, 'month')
@@ -361,7 +361,7 @@ export default function SystemProfileSection({
               inputMode="numeric"
               maxLength={4}
               placeholder="YYYY"
-              value={dobYear}
+              value={dobYear ?? ''}
               onChange={handleYearChange}
               onKeyDown={(e) =>
                 handleBackspace(e, 'year')

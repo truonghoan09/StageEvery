@@ -1,47 +1,52 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL
 
-export interface SendMagicLinkResult {
-  allowed: boolean
-  retryAfter?: number
+// ======================
+// Types
+// ======================
+
+export interface GoogleLoginResult {
+  user: {
+    id: string
+    email: string
+    name: string
+    avatar?: string | null
+  }
 }
 
-export async function requestSendMagicLink(): Promise<SendMagicLinkResult> {
-  const res = await fetch(`${API_BASE}/auth/send-magic-link`, {
+// ======================
+// APIs
+// ======================
+
+/**
+ * Login / Signup via Google OAuth
+ * @param idToken Google ID token from popup
+ */
+export async function loginWithGoogle(
+  idToken: string
+): Promise<GoogleLoginResult> {
+  const res = await fetch(`${API_BASE}/auth/google`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({ idToken }),
   })
+
+  if (!res.ok) {
+    throw new Error('GOOGLE_LOGIN_FAILED')
+  }
 
   const data = await res.json()
 
-  // ⚠️ RATE LIMIT = EXPECTED FLOW
-  if (res.status === 429) {
-    return data
-  }
-
-  // ❌ Các lỗi khác mới là error thật
-  if (!res.ok) {
-    throw new Error('SEND_MAGIC_LINK_FAILED')
-  }
+  // 🔑 Lưu userId để dùng cho auth middleware (MVP)
+  localStorage.setItem('userId', data.user.id)
 
   return data
 }
 
-
-export async function notifyLoginSuccess(idToken: string) {
-  const res = await fetch(
-    `${import.meta.env.VITE_API_BASE_URL}/auth/login-success`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
-    }
-  )
-
-  if (!res.ok) {
-    // Không throw – không block login UX
-    console.warn('Failed to notify login success')
-  }
+/**
+ * Logout (frontend only – MVP)
+ */
+export function logout() {
+  localStorage.removeItem('userId')
 }
