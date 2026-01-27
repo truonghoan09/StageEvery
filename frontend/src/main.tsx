@@ -21,32 +21,18 @@ const queryClient = new QueryClient({
   },
 })
 
-const isLocal =
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1'
-
-const AppTree = (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <HelmetProvider>
-        <ThemeProvider>
-          <App />
-        </ThemeProvider>
-      </HelmetProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-)
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {isLocal ? (
-      <GoogleOAuthProvider
-        clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
-      >
-        {AppTree}
-      </GoogleOAuthProvider>
-    ) : (
-      AppTree
-    )}
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <HelmetProvider>
+            <ThemeProvider>
+              <App />
+            </ThemeProvider>
+          </HelmetProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 )

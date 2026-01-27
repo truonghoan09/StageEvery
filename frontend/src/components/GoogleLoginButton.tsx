@@ -1,103 +1,44 @@
-import { useEffect, useRef } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import { useAuth } from '../contexts/AuthContext'
 import './GoogleLoginButton.scss'
 
-declare global {
-  interface Window {
-    google: any
-  }
-}
-
-const isLocal =
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1'
-
 export default function GoogleLoginButton() {
   const { login } = useAuth()
-  const initializedRef = useRef(false)
-
-  /**
-   * =========================
-   * PROD: Google Identity Services (GIS)
-   * =========================
-   */
-  useEffect(() => {
-    if (isLocal) return
-    if (initializedRef.current) return
-    if (!window.google) return
-
-    window.google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      callback: (response: any) => {
-        const idToken = response.credential
-        if (!idToken) return
-        login(idToken)
-      },
-    })
-
-    initializedRef.current = true
-  }, [login])
-
-  /**
-   * =========================
-   * CLICK HANDLER
-   * =========================
-   */
-  const handleClick = () => {
-    if (isLocal) {
-      const hiddenBtn = document.getElementById(
-        'google-login-hidden-btn'
-      ) as HTMLElement | null
-
-      hiddenBtn?.querySelector('div[role="button"]')?.dispatchEvent(
-        new MouseEvent('click', { bubbles: true })
-      )
-      return
-    }
-
-    if (!window.google) {
-      console.error('[GOOGLE LOGIN] Google SDK not loaded')
-      return
-    }
-
-    window.google.accounts.id.prompt()
-  }
 
   return (
-    <>
-      {/* =========================
-          LOCAL ONLY: GoogleLogin engine (hidden)
-         ========================= */}
-      {isLocal && (
-        <div style={{ display: 'none' }}>
-          <GoogleLogin
-            onSuccess={(res) => {
-              if (!res.credential) return
-              login(res.credential)
-            }}
-            onError={() => {
-              console.error('[GOOGLE LOGIN] failed')
-            }}
-            useOneTap={false}
-            type="standard"
-            theme="outline"
-            size="large"
-            text="continue_with"
-            containerProps={{
-              id: 'google-login-hidden-btn',
-            }}
-          />
-        </div>
-      )}
+    <div className="google-login-wrapper">
+      {/* Google OAuth popup engine (hidden UI) */}
+      <div style={{ display: 'none' }}>
+        <GoogleLogin
+          onSuccess={(res) => {
+            if (!res.credential) return
+            login(res.credential)
+          }}
+          onError={() => {
+            console.error('[GOOGLE LOGIN] failed')
+          }}
+          useOneTap={false}
+          type="standard"
+          theme="outline"
+          size="large"
+          text="continue_with"
+          containerProps={{
+            id: 'google-login-hidden-btn',
+          }}
+        />
+      </div>
 
-      {/* =========================
-          CUSTOM UI (COMMON)
-         ========================= */}
+      {/* Custom UI */}
       <button
         className="google-login-button"
         type="button"
-        onClick={handleClick}
+        onClick={() => {
+          const btn = document
+            .getElementById('google-login-hidden-btn')
+            ?.querySelector('div[role="button"]') as HTMLElement | null
+
+          btn?.click()
+        }}
       >
         <span className="google-icon">
           <svg viewBox="0 0 48 48">
@@ -124,6 +65,6 @@ export default function GoogleLoginButton() {
           Continue with Google
         </span>
       </button>
-    </>
+    </div>
   )
 }
