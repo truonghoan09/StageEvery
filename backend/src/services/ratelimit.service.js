@@ -10,7 +10,7 @@ function makeKey(ip, ua) {
     .update(ip + ua)
     .digest('hex')
 }
-//sửa tên file
+
 
 exports.checkRateLimit = async (ip, ua) => {
   const key = makeKey(ip, ua)
