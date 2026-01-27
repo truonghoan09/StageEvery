@@ -4,17 +4,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #2f2f2f;
-  color: #fff;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .login-card {
   width: 100%;
   max-width: 420px;
   padding: 32px;
-  background: #3a3a3a;
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  background: var(--bg-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   text-align: center;
 }
 
@@ -22,24 +23,32 @@
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 8px;
+  color: var(--text);
 }
 
 .login-subtitle {
   font-size: 14px;
-  color: #cfcfcf;
+  color: var(--text-soft);
   margin-bottom: 24px;
 }
 
+/* Container cho Google button */
+.login-google {
+  margin-top: 8px;
+}
+
+/* Các class cũ giữ lại cho tương lai (không dùng hiện tại) */
 
 .login-button {
   width: 100%;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   border: none;
-  background: #ffffff;
-  color: #000;
+  background: var(--primary);
+  color: #fff;
   font-weight: 600;
   cursor: pointer;
+  transition: opacity 0.15s ease;
 }
 
 .login-button:hover {
@@ -50,10 +59,10 @@
   width: 100%;
   margin-top: 16px;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: transparent;
-  border: 1px solid #aaa;
-  color: #fff;
+  border: 1px solid var(--border);
+  color: var(--text);
   cursor: pointer;
 }
 
@@ -61,7 +70,7 @@
   margin-top: 12px;
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--text-muted);
   cursor: pointer;
   font-size: 13px;
 }
@@ -69,13 +78,14 @@
 .login-status,
 .login-hint {
   font-size: 13px;
-  color: #bbb;
+  color: var(--text-muted);
   margin-top: 12px;
 }
 
 .login-success {
   margin-bottom: 12px;
   font-size: 14px;
+  color: var(--text);
 }
 
 .login-error {
@@ -88,26 +98,4 @@
   margin-top: 24px;
   opacity: 0.4;
   font-size: 12px;
-}
-
-
-.login-register {
-  margin-top: 24px;
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-
-  .login-register-link {
-    background: none;
-    border: none;
-    margin-left: 4px;
-    padding: 0;
-    font-weight: 500;
-    color: var(--primary);
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }

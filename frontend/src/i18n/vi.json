@@ -10,37 +10,7 @@
   "auth": {
     "login": {
       "title": "Đăng nhập",
-      "subtitle": "Nhập Gmail hoặc số điện thoại để đăng nhập.",
-      "placeholder": "Gmail hoặc số điện thoại",
-      "submit": "Đăng nhập",
-      "noAccount": "Chưa có tài khoản?",
-      "createProfile": "Tạo hồ sơ miễn phí",
-
-
-      "hintGmailOnly": "",
-
-      "status": {
-        "sending": "Đang gửi email…",
-        "sent": "Chúng tôi đã gửi link đăng nhập tới",
-        "resendIn": "Có thể gửi lại sau {{time}}",
-        "resend": "Gửi lại email"
-      },
-
-      "errors": {
-        "required": "Vui lòng nhập email.",
-        "gmailOnly": "Chỉ hỗ trợ địa chỉ Gmail.",
-        "length": "Tên Gmail phải từ 6 đến 30 ký tự.",
-        "characters": "Tên Gmail chỉ được chứa chữ cái, số và dấu chấm.",
-        "dotEdge": "Tên Gmail không được bắt đầu hoặc kết thúc bằng dấu chấm.",
-        "dotConsecutive": "Tên Gmail không được chứa hai dấu chấm liên tiếp.",
-        "sendFail": "Gửi email chưa thành công. Vui lòng thử lại sau.",
-        "tooManyAttempts": "Bạn đã thử quá nhiều lần."
-      },
-
-      "dev": {
-        "fakeClick": "DEV: Giả lập bấm link đăng nhập",
-        "forceFail": "DEV: Giả lập gửi email thất bại"
-      }
+      "subtitle": "Tiếp tục với Google để bắt đầu."
     }
   },
   "homepage": {
@@ -255,5 +225,106 @@
         "openPublic": "Mở trang public",
         "note": "Bản xem trước – đây là cách trang của bạn hiển thị với công chúng"
       }
+  },
+  "legal": {
+    "terms": {
+      "title": "Điều khoản sử dụng",
+      "meta": "Ngày hiệu lực: 27 tháng 01 năm 2026 · Phiên bản 1.0",
+      "disclaimer": "Bản dịch tiếng Việt này chỉ nhằm mục đích tham khảo. Trong trường hợp có mâu thuẫn, bản tiếng Anh sẽ được ưu tiên áp dụng.",
+      "sections": {
+        "about": {
+          "title": "Giới thiệu về StageEvery",
+          "content": "StageEvery là nền tảng dành cho nghệ sĩ và nhà sáng tạo âm nhạc để tạo, quản lý và trình bày hồ sơ trực tuyến, bao gồm nội dung âm nhạc, hình ảnh, video và thông tin liên hệ."
+        },
+        "eligibility": {
+          "title": "Điều kiện sử dụng",
+          "content": "Bạn phải từ 13 tuổi trở lên để sử dụng StageEvery."
+        },
+        "account": {
+          "title": "Đăng ký và xác thực tài khoản",
+          "content": "StageEvery sử dụng Google OAuth để xác thực. Bạn có trách nhiệm bảo mật và đảm bảo thông tin tài khoản của mình là chính xác."
+        },
+        "content": {
+          "title": "Nội dung người dùng cung cấp",
+          "content": "Bạn giữ quyền sở hữu đối với tất cả nội dung bạn cung cấp, bao gồm thông tin hồ sơ, ngày sinh, số điện thoại (tùy chọn), hình ảnh, video, nội dung âm nhạc, liên kết mạng xã hội và các thông tin khác bạn tự nguyện cung cấp."
+        },
+        "use": {
+          "title": "Sử dụng hợp lệ",
+          "content": "Bạn đồng ý không sử dụng dịch vụ cho các mục đích trái pháp luật hoặc xâm phạm quyền của người khác."
+        },
+        "pricing": {
+          "title": "Tính năng miễn phí và trả phí",
+          "content": "Hiện tại, StageEvery cung cấp các tính năng cốt lõi miễn phí. Một số tính năng nâng cao có thể yêu cầu trả phí trong tương lai."
+        },
+        "termination": {
+          "title": "Chấm dứt sử dụng",
+          "content": "Bạn có thể ngừng sử dụng StageEvery bất kỳ lúc nào. Chúng tôi có quyền tạm ngưng hoặc chấm dứt quyền truy cập nếu bạn vi phạm Điều khoản."
+        },
+        "disclaimer": {
+          "title": "Tuyên bố miễn trừ trách nhiệm",
+          "content": "Dịch vụ được cung cấp trên cơ sở “nguyên trạng” và không kèm theo bất kỳ bảo đảm nào."
+        },
+        "liability": {
+          "title": "Giới hạn trách nhiệm",
+          "content": "StageEvery không chịu trách nhiệm đối với các thiệt hại gián tiếp hoặc phát sinh."
+        },
+        "changes": {
+          "title": "Thay đổi Điều khoản",
+          "content": "Chúng tôi có thể cập nhật Điều khoản và có thể yêu cầu bạn đồng ý lại."
+        },
+        "contact": {
+          "title": "Liên hệ",
+          "content": "support@stageevery.com"
+        }
+      }
+    },
+
+    "privacy": {
+      "title": "Chính sách bảo mật",
+      "meta": "Ngày hiệu lực: 27 tháng 01 năm 2026 · Phiên bản 1.0",
+      "disclaimer": "Bản dịch tiếng Việt này chỉ nhằm mục đích tham khảo. Trong trường hợp có mâu thuẫn, bản tiếng Anh sẽ được ưu tiên áp dụng.",
+      "sections": {
+        "collect": {
+          "title": "Thông tin chúng tôi thu thập",
+          "content": "Chúng tôi có thể thu thập các thông tin cá nhân như email, tên hiển thị, ngày sinh (tùy chọn), số điện thoại (tùy chọn), hình ảnh, video, nội dung âm nhạc, liên kết mạng xã hội và các thông tin khác bạn tự nguyện cung cấp."
+        },
+        "use": {
+          "title": "Mục đích sử dụng thông tin",
+          "content": "Thông tin được sử dụng để tạo và quản lý tài khoản, cung cấp và cải thiện dịch vụ, hiển thị hồ sơ người dùng và gửi các thông báo quan trọng."
+        },
+        "auth": {
+          "title": "Xác thực người dùng",
+          "content": "StageEvery sử dụng Google OAuth và không lưu trữ mật khẩu."
+        },
+        "sharing": {
+          "title": "Chia sẻ dữ liệu",
+          "content": "Chúng tôi không bán dữ liệu cá nhân. Thông tin chỉ được chia sẻ với các dịch vụ cần thiết để vận hành nền tảng."
+        },
+        "retention": {
+          "title": "Lưu trữ dữ liệu",
+          "content": "Dữ liệu được lưu trữ trong thời gian tài khoản còn hoạt động hoặc khi cần thiết để cung cấp dịch vụ."
+        },
+        "security": {
+          "title": "Bảo mật thông tin",
+          "content": "Chúng tôi áp dụng các biện pháp bảo mật hợp lý, tuy nhiên không có hệ thống nào an toàn tuyệt đối."
+        },
+        "children": {
+          "title": "Quyền riêng tư của trẻ em",
+          "content": "StageEvery không dành cho người dùng dưới 13 tuổi."
+        },
+        "rights": {
+          "title": "Quyền của bạn",
+          "content": "Bạn có quyền truy cập, chỉnh sửa hoặc yêu cầu xoá dữ liệu cá nhân của mình."
+        },
+        "changes": {
+          "title": "Thay đổi chính sách",
+          "content": "Các thay đổi quan trọng có thể yêu cầu bạn đồng ý lại."
+        },
+        "contact": {
+          "title": "Liên hệ",
+          "content": "privacy@stageevery.com"
+        }
+      }
+    }
   }
 }

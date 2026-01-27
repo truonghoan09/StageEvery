@@ -8,7 +8,6 @@ import ArtistDashboardPage from '../pages/ArtistDashboardPage';
 
 import AuthLayout from '../layouts/AuthLayout';
 import LoginPage from '../pages/auth/LoginPage';
-import RegisterPage from '../pages/auth/RegisterPage';
 
 import ProfileSection from '../dashboard/sections/ProfileSection';
 import MusicSection from '../dashboard/sections/MusicSection';
@@ -16,6 +15,8 @@ import ContactSection from '../dashboard/sections/ContactSection';
 import PreviewSection from '../dashboard/sections/PreviewSection';
 import AppearanceSection from '../dashboard/sections/appearance/AppearanceSection';
 import SystemProfileSection from '../dashboard/sections/SystemProfileSection'
+import TermsPage from '../pages/legal/TermsPage';
+import PrivacyPage from '../pages/legal/PrivacyPage';
 
 export default function AppRouter() {
   return (
@@ -26,7 +27,6 @@ export default function AppRouter() {
 
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
         </Route>
 
         <Route path="/dashboard" element={<ArtistDashboardPage />}>
@@ -38,6 +38,8 @@ export default function AppRouter() {
           <Route path="contact" element={<ContactSection />} />
           <Route path="preview" element={<PreviewSection />} />
         </Route>
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
       </Routes>
     </BrowserRouter>
   );

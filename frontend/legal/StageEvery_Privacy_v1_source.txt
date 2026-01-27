@@ -1,0 +1,43 @@
+StageEvery – Privacy Policy (v1.0) Effective date: 27 January 2026
+
+StageEvery respects your privacy.
+
+1.  Information We Collect We may collect the following types of
+    personal information:
+
+-   Email address
+-   Display name
+-   Date of birth (optional)
+-   Phone number (optional)
+-   Profile images and videos
+-   Music-related content and metadata
+-   Social media links and external URLs
+-   Any other information you voluntarily provide
+
+2.  How We Use Information We use this information to:
+
+-   Create and manage accounts
+-   Provide and improve the service
+-   Display user profiles as configured by users
+-   Communicate important service-related messages
+
+3.  Authentication We use Google OAuth and do not store passwords.
+
+4.  Data Sharing We do not sell personal data. Information is shared
+    only with essential service providers (e.g. hosting,
+    authentication).
+
+5.  Data Retention Data is retained while your account remains active or
+    as required to provide the service. You may request deletion at any
+    time.
+
+6.  Security We apply reasonable security measures, but no system is
+    completely secure.
+
+7.  Children’s Privacy Not intended for users under 13.
+
+8.  Your Rights You may access, update, or delete your personal data.
+
+9.  Changes Updates to this policy may require renewed consent.
+
+Contact: privacy@stageevery.com

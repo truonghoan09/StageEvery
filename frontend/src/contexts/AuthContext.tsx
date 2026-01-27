@@ -1,7 +1,6 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useState,
 } from 'react'
 
@@ -9,9 +8,7 @@ import { getAuthAdapter } from '../auth/getAuthAdapter'
 
 export type AuthFlowState =
   | 'idle'
-  | 'sending_email'
-  | 'email_sent'
-  | 'email_failed'
+  | 'authenticating'
   | 'authenticated'
 
 type AuthContextValue = {
@@ -35,34 +32,16 @@ export function AuthProvider({
   const isAuthenticated = flow === 'authenticated'
 
   /* =========================
-     SEND MAGIC LINK
+     SEND MAGIC LINK (DISABLED)
+     — giữ để UI không vỡ
   ========================= */
 
   const sendMagicLink = async (email: string) => {
-    try {
-      setFlow('sending_email')
-      await authAdapter.sendMagicLink(email)
-      setFlow('email_sent')
-    } catch (err) {
-      console.error('[AUTH] sendMagicLink failed', err)
-      setFlow('email_failed')
-    }
+    console.warn(
+      '[AUTH] Magic link disabled. OAuth only.',
+      email
+    )
   }
-
-  /* =========================
-     AUTO-DETECT MAGIC LINK
-  ========================= */
-
-  // useEffect(() => {
-  //   authAdapter
-  //     .clickMagicLink()
-  //     .then(() => {
-  //       setFlow('authenticated')
-  //     })
-  //     .catch(() => {
-  //       // ignore
-  //     })
-  // }, [])
 
   /* =========================
      LOGOUT

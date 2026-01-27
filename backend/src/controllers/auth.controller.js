@@ -1,55 +1,76 @@
-const { checkRateLimit } = require('../services/rateLimit.service')
+const { OAuth2Client } = require("google-auth-library");
+const { db } = require("../firebase/firebase");
 
-exports.sendMagicLink = async (req, res) => {
-  const ip =
-    req.headers['x-forwarded-for']?.split(',')[0] ||
-    req.socket.remoteAddress
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-  const userAgent = req.headers['user-agent'] || 'unknown'
+/**
+ * POST /auth/google
+ * Body: { idToken }
+ */
+exports.googleAuth = async (req, res) => {
+  const { idToken } = req.body;
 
-  const result = await checkRateLimit(ip, userAgent)
-
-  if (!result.allowed) {
-    return res.status(429).json({
-      allowed: false,
-      retryAfter: result.retryAfter,
-    })
+  if (!idToken) {
+    return res.status(400).json({
+      error: "MISSING_ID_TOKEN",
+    });
   }
 
-  return res.json({ allowed: true })
-}
+  let payload;
 
+  try {
+    const ticket = await googleClient.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
 
-const crypto = require('crypto')
-const { db } = require('../firebase/firebase')
+    payload = ticket.getPayload();
+  } catch (err) {
+    return res.status(401).json({
+      error: "INVALID_GOOGLE_TOKEN",
+    });
+  }
 
-function makeKey(ip, ua) {
-  return crypto
-    .createHash('sha256')
-    .update(ip + ua)
-    .digest('hex')
-}
+  const {
+    sub: googleId,
+    email,
+    name,
+    picture,
+    email_verified,
+  } = payload;
 
-exports.markLoginSuccess = async (req, res) => {
-  const ip =
-    req.headers['x-forwarded-for']?.split(',')[0] ||
-    req.socket.remoteAddress
+  if (!email || !email_verified) {
+    return res.status(403).json({
+      error: "EMAIL_NOT_VERIFIED",
+    });
+  }
 
-  const ua = req.headers['user-agent'] || 'unknown'
-  const key = makeKey(ip, ua)
+  const userRef = db.collection("users").doc(googleId);
+  const snap = await userRef.get();
 
-  const ref = db.collection('auth_rate_limits').doc(key)
+  let user;
 
-  await ref.set(
-    {
-      count: 0,
-      banLevel: 0,
-      blockedUntil: null,
-      firstAttemptAt: Date.now(),
-      lastAttemptAt: Date.now(),
-    },
-    { merge: true }
-  )
+  if (!snap.exists) {
+    user = {
+      id: googleId,
+      email,
+      name,
+      avatar: picture || null,
+      provider: "google",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
 
-  res.json({ ok: true })
-}
+    await userRef.set(user);
+  } else {
+    user = snap.data();
+
+    await userRef.update({
+      updatedAt: Date.now(),
+    });
+  }
+
+  return res.json({
+    user,
+  });
+};

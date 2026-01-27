@@ -1,0 +1,47 @@
+StageEvery – Terms of Service (v1.0) Effective date: 27 January 2026
+
+Welcome to StageEvery (“StageEvery”, “we”, “our”, “us”). By accessing or
+using StageEvery, you agree to these Terms of Service (“Terms”).
+
+1.  About StageEvery StageEvery is a platform for artists and music
+    creators to create, manage, and present an online profile, including
+    music-related content, media, and contact information.
+
+2.  Eligibility You must be at least 13 years old to use StageEvery.
+
+3.  Account Registration and Authentication StageEvery uses Google OAuth
+    for authentication. You are responsible for maintaining the accuracy
+    and security of your account.
+
+4.  User Content You retain ownership of all content you submit,
+    including but not limited to:
+
+-   Profile information
+-   Music metadata
+-   Images and videos
+-   Social links and contact details
+
+You grant StageEvery a limited, non-exclusive license to host, display,
+and distribute such content solely to provide the service.
+
+5.  Acceptable Use You agree not to misuse the service, violate
+    applicable laws, or infringe the rights of others.
+
+6.  Free and Paid Features StageEvery currently provides free access to
+    core features. Some advanced features may require payment in the
+    future. Pricing and terms will be clearly communicated before any
+    charges apply.
+
+7.  Termination You may stop using StageEvery at any time. We may
+    suspend or terminate access if these Terms are violated.
+
+8.  Disclaimer The service is provided “as is” without warranties of any
+    kind.
+
+9.  Limitation of Liability StageEvery is not liable for indirect or
+    consequential damages.
+
+10. Changes We may update these Terms and may require renewed
+    acceptance.
+
+Contact: support@stageevery.com

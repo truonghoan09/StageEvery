@@ -10,36 +10,7 @@
   "auth": {
     "login": {
       "title": "Sign in",
-      "subtitle": "Enter your Gmail address to receive a sign-in link.",
-      "placeholder": "example example@gmail.com",
-      "submit": "Send magic link",
-      "noAccount": "Don't have an account?",
-      "createProfile": "Create a free profile",
-
-      "hintGmailOnly": "Currently, only Gmail addresses are supported.",
-
-      "status": {
-        "sending": "Sending email…",
-        "sent": "We’ve sent a sign-in link to:",
-        "resendIn": "Resend available in {{time}}",
-        "resend": "Resend email"
-      },
-
-      "errors": {
-        "required": "Please enter your email.",
-        "gmailOnly": "Only Gmail addresses are supported.",
-        "length": "Gmail usernames must be between 6 and 30 characters.",
-        "characters": "Gmail usernames can only contain letters, numbers, and dots.",
-        "dotEdge": "Gmail usernames cannot start or end with a dot.",
-        "dotConsecutive": "Gmail usernames cannot contain consecutive dots.",
-        "sendFail": "Failed to send email.",
-        "tooManyAttempts": "You’ve tried too many times."
-      },
-
-      "dev": {
-        "fakeClick": "DEV: Fake click magic link",
-        "forceFail": "DEV: Force send failure"
-      }
+      "subtitle": "Continue with Google to get started."
     }
   },
   "homepage": {
@@ -253,5 +224,107 @@
       "openPublic": "Open public page",
       "note": "Preview – this is how your public page looks to others"
     }
+  },
+  "legal": {
+    "terms": {
+      "title": "Terms of Service",
+      "meta": "Effective date: 27 January 2026 · Version 1.0",
+      "disclaimer": "",
+      "sections": {
+        "about": {
+          "title": "About StageEvery",
+          "content": "StageEvery is a platform for artists and music creators to create, manage, and present an online profile, including music-related content, media, and contact information."
+        },
+        "eligibility": {
+          "title": "Eligibility",
+          "content": "You must be at least 13 years old to use StageEvery."
+        },
+        "account": {
+          "title": "Account Registration and Authentication",
+          "content": "StageEvery uses Google OAuth for authentication. You are responsible for maintaining the accuracy and security of your account."
+        },
+        "content": {
+          "title": "User Content",
+          "content": "You retain ownership of all content you submit, including profile information, date of birth, phone number, images, videos, music-related content, social links, and other information you voluntarily provide."
+        },
+        "use": {
+          "title": "Acceptable Use",
+          "content": "You agree not to misuse the service, violate applicable laws, or infringe the rights of others."
+        },
+        "pricing": {
+          "title": "Free and Paid Features",
+          "content": "StageEvery currently provides free access to core features. Some advanced features may require payment in the future."
+        },
+        "termination": {
+          "title": "Termination",
+          "content": "You may stop using StageEvery at any time. We may suspend or terminate access if these Terms are violated."
+        },
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The service is provided on an “as is” basis without warranties of any kind."
+        },
+        "liability": {
+          "title": "Limitation of Liability",
+          "content": "StageEvery is not liable for indirect or consequential damages."
+        },
+        "changes": {
+          "title": "Changes to These Terms",
+          "content": "We may update these Terms and may require renewed acceptance."
+        },
+        "contact": {
+          "title": "Contact",
+          "content": "support@stageevery.com"
+        }
+      }
+    },
+
+    "privacy": {
+      "title": "Privacy Policy",
+      "meta": "Effective date: 27 January 2026 · Version 1.0",
+      "disclaimer": "",
+      "sections": {
+        "collect": {
+          "title": "Information We Collect",
+          "content": "We may collect personal information such as email address, display name, date of birth (optional), phone number (optional), profile images, videos, music-related content, social media links, and any other information you voluntarily provide."
+        },
+        "use": {
+          "title": "How We Use Your Information",
+          "content": "We use this information to create and manage accounts, provide and improve the service, display user profiles, and communicate important service-related messages."
+        },
+        "auth": {
+          "title": "Authentication",
+          "content": "StageEvery uses Google OAuth for authentication and does not store passwords."
+        },
+        "sharing": {
+          "title": "Data Sharing",
+          "content": "We do not sell personal data. Information is shared only with essential service providers."
+        },
+        "retention": {
+          "title": "Data Retention",
+          "content": "We retain your data while your account remains active or as required to provide the service."
+        },
+        "security": {
+          "title": "Security",
+          "content": "We apply reasonable security measures, but no system is completely secure."
+        },
+        "children": {
+          "title": "Children’s Privacy",
+          "content": "StageEvery is not intended for users under the age of 13."
+        },
+        "rights": {
+          "title": "Your Rights",
+          "content": "You may access, update, or delete your personal data at any time."
+        },
+        "changes": {
+          "title": "Changes to This Policy",
+          "content": "Updates to this policy may require renewed consent."
+        },
+        "contact": {
+          "title": "Contact",
+          "content": "privacy@stageevery.com"
+        }
+      }
+    }
   }
+
 }
